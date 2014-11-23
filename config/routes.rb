@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  root 'opr_system#home'
+  get 'help' => 'opr_system#help'
+  get 'contact' => 'opr_system#contact'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
