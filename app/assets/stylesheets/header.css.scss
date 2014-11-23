@@ -1,0 +1,13 @@
+/*Header*/
+
+#logo {
+  float: left;
+  font-size: 30px;
+  font-weight: bold;
+  margin-top: 6px;
+  color: white;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
