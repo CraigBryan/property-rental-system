@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'visits/list'
+
+  get 'visits/view_list'
+
   root 'opr_system#home'
   get 'help' => 'opr_system#help'
   get 'contact' => 'opr_system#contact'

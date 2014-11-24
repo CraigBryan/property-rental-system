@@ -1,0 +1,19 @@
+<!-- TODO styling! -->
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Date</th>
+      <th>Time</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @visits.each do |visit| %>
+    <tr>
+      <td><%= link_to visit.property.name, visit.property %></td>
+      <td><%= visit.date %></td>
+      <td><%= visit.time %></td>
+    </tr>
+  </tbody>
+</table>
