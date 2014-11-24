@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  prop_type: MyString
+  address: MyString
+  location: MyString
+  number_bathrooms: 1
+  number_bedrooms: 1
+  number_other_rooms: 1
+  rent_price: 1
+  deleted: false
+
+two:
+  prop_type: MyString
+  address: MyString
+  location: MyString
+  number_bathrooms: 1
+  number_bedrooms: 1
+  number_other_rooms: 1
+  rent_price: 1
+  deleted: false

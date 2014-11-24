@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  email_address: MyString
+  rental_date: 2014-11-24
+  rental_time: 2014-11-24 17:16:19
+  downloadLink: MyString
+
+two:
+  email_address: MyString
+  rental_date: 2014-11-24
+  rental_time: 2014-11-24 17:16:19
+  downloadLink: MyString
