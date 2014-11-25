@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  credit_card_type: MyString
+  credit_card_number: 1
+  credit_card_holder_name: MyString
+  expiry_month: 1
+  expiry_year: 1
+
+two:
+  credit_card_type: MyString
+  credit_card_number: 1
+  credit_card_holder_name: MyString
+  expiry_month: 1
+  expiry_year: 1
