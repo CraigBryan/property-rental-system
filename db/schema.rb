@@ -11,10 +11,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141123224414) do
+ActiveRecord::Schema.define(version: 20141125002930) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "leases", force: true do |t|
+    t.date     "rental_date"
+    t.time     "rental_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "download_link"
+    t.integer  "property_id"
+  end
+
+  add_index "leases", ["property_id"], name: "index_leases_on_property_id", using: :btree
+
+  create_table "photos", force: true do |t|
+    t.string   "file"
+    t.string   "thumbnail_file"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "property_id"
+  end
+
+  add_index "photos", ["property_id"], name: "index_photos_on_property_id", using: :btree
+
+  create_table "properties", force: true do |t|
+    t.string   "prop_type"
+    t.string   "address"
+    t.string   "location"
+    t.integer  "number_bathrooms"
+    t.integer  "number_bedrooms"
+    t.integer  "number_other_rooms"
+    t.integer  "rent_price"
+    t.boolean  "deleted"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "fName"
@@ -28,5 +62,15 @@ ActiveRecord::Schema.define(version: 20141123224414) do
     t.datetime "updated_at"
     t.string   "password_digest"
   end
+
+  create_table "visits", force: true do |t|
+    t.date     "date"
+    t.time     "time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "property_id"
+  end
+
+  add_index "visits", ["property_id"], name: "index_visits_on_property_id", using: :btree
 
 end
