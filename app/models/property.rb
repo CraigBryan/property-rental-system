@@ -2,9 +2,9 @@ class Property < ActiveRecord::Base
   has_many :visits, :dependent => :destroy
   has_many :photos, :dependent => :destroy
   has_many :leases, :dependent => :destroy
-  belongs_to :owner_account
+  belongs_to :user
 
-  validates_presence_of :owner_account,
+  validates_presence_of :user
                         :prop_type,
                         :address,
                         :number_bedrooms,

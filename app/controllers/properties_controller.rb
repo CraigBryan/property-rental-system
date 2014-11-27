@@ -1,5 +1,6 @@
 class PropertiesController < ApplicationController
   #TODO only allow add for owners and agents
+  before_action :ensure_authorized, :only => [:new, :create]
 
   def new
     @property = Property.new
@@ -7,7 +8,7 @@ class PropertiesController < ApplicationController
 
   def create
     @property = Property.new property_params
-    #TODO add owner info
+    @property.
     if @property.save
       redirect_to action: 'index' #TODO do something more logical instead
     else
@@ -30,5 +31,14 @@ class PropertiesController < ApplicationController
                                      :number_bedrooms,
                                      :number_other_rooms,
                                      :rent_price)
+  end
+
+  private:
+
+  def ensure_authorized
+    unless(current_user.is_role_by_name?('admin') || 
+           current_user.is_role_by_name?('owner'))
+      render 'common/not_authorized'
+    end    
   end
 end
