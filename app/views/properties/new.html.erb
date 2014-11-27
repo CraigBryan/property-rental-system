@@ -1,0 +1,27 @@
+<h1>Add property</h1>
+
+<%= form_for @property do |prop_form| %>
+
+  <%= prop_form.label :prop_type %>
+  <%= prop_form.text_field :prop_type %>
+
+  <%= prop_form.label :address %>
+  <%= prop_form.text_field :address %>
+
+  <%= prop_form.label :location %>
+  <%= prop_form.text_field :location %>
+
+  <%= prop_form.label :number_bathrooms %>
+  <%= prop_form.text_field :number_bathrooms %>
+
+  <%= prop_form.label :number_bedrooms %>
+  <%= prop_form.text_field :number_bedrooms %>
+
+  <%= prop_form.label :number_other_rooms %>
+  <%= prop_form.text_field :number_other_rooms %>
+
+  <%= prop_form.label :rent_price %>
+  <%= prop_form.text_field :rent_price %>
+
+  <%= prop_form.submit "Add Property" %>
+<% end %> 

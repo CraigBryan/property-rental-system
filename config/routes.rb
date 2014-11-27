@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  get 'visits/list'
+  resources :properties
 
-  get 'visits/view_list'
+  get 'visits/list'
 
   root 'opr_system#home'
   get 'help' => 'opr_system#help'

@@ -1,0 +1,11 @@
+<h1> Properties </h1>
+
+<% if @properties.size == 0 %>
+  <p>No properties found</p>
+<% else %>
+  <% properties.each do |prop| %>
+    <p>
+      <%= prop.address %>
+    </p>
+  <% end %>
+<% end %>
