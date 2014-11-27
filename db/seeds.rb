@@ -6,10 +6,20 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-r = Role.new(:name => "admin")
-r.save
+a = Role.new(:name => "admin")
+a.save
+c = Role.new(:name => "customer")
+c.save
+o = Role.new(:name => "owner")
+o.save
 
-u = User.new({:email => "kat.drobnjakovic@gmail.com", :password => "admin1234", :password_confirmation => "admin1234"} )
-u.save
+au = User.new({:email => "kat.drobnjakovic@gmail.com", :password => "admin1234", :password_confirmation => "admin1234"} )
+au.save
+cu = User.new({:email => "craig@gmail.com", :password => "customer1234", :password_confirmation => "customer1234"} )
+cu.save
+ou = User.new({:email => "ryan@gmail.com", :password => "owner1234", :password_confirmation => "owner1234"} )
+ou.save
 
-u.add_role(r)
+au.add_role(a)
+cu.add_role(c)
+ou.add_role(o)
