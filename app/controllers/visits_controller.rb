@@ -7,12 +7,12 @@ class VisitsController < ApplicationController
 
   def create
     @visit = Visit.new(visit_params)
-    #TODO set customer association
+    @visit.user = current_user
 
     if @visit.save
       #TODO
     else
-      #TODO
+      #TODO render error or something
     end
   end
 
