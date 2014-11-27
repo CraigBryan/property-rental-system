@@ -10,9 +10,9 @@ class VisitsController < ApplicationController
     @visit.user = current_user
 
     if @visit.save
-      #TODO
+      render "list"
     else
-      #TODO render error or something
+      render "not_authorized" #TODO make more sense
     end
   end
 

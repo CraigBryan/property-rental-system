@@ -4,15 +4,19 @@
      available from context -->
 <h1>Add to visiting list</h1>
 
-<%= form_for @visit do |v| %>
+<%= form_for @visit do |visit_form| %>
 
-  <%= prop_form.label :date %>
-  <%= prop_form.date_field :date %>
+  <%= visit_form.label :user %>
+  <%= visit_form.hidden_field :user, :value => params[:property] %>
   <br>
 
-  <%= prop_form.label :time %>
-  <%= prop_form.time_field :time %>
+  <%= visit_form.label :date %>
+  <%= visit_form.date_field :date %>
   <br>
 
-  <%= prop_form.submit "Add to Visiting List" %>
+  <%= visit_form.label :time %>
+  <%= visit_form.time_field :time %>
+  <br>
+
+  <%= visit_form.submit "Add to Visiting List" %>
 <% end %>
