@@ -1,12 +1,11 @@
 <div class="center jumbotron">
   <h1>Welcome to Beary Best Rentals</h1>
 
-  <h2>Please sign in below</h2>
-
   <% if user_signed_in? %>
   	<!--<%= link_to 'Edit profile', edit_user_registration_path, :class => "btn btn-lg btn-primary" %> -->
   	<%= link_to "Logout", destroy_user_session_path, method: :delete, :class => "btn btn-lg btn-primary"  %>
   <% else %>
+  	<h2>Please sign in below</h2>
   	<%= link_to "Sign up", new_user_registration_path, :class => "btn btn-lg btn-primary" %> 
   	<%= link_to "Login", new_user_session_path, :class => "btn btn-lg btn-primary"  %>
   <% end %>
