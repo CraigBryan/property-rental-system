@@ -16,5 +16,4 @@ class Property < ActiveRecord::Base
   validates :number_bathrooms, :numericality => { :greater_or_equal_to  => 0 }
   validates :number_other_rooms, :numericality => { :greater_or_equal_to  => 0 }
   validates :rent_price, :numericality => { :greater_or_equal_to  => 0 }
-
 end
