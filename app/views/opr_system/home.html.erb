@@ -3,6 +3,14 @@
 
   <h2>Please sign in below</h2>
 
-  <%= link_to 'Log in', '#', id: "log_in", class: "btn btn-lg btn-primary" %>
+  <% if user_signed_in? %>
+  	Logged in as <strong><%= current_user.email %></strong>.
+  	<%= link_to 'Edit profile', edit_user_registration_path, :class => "btn btn-lg btn-primary" %> 
+  	<%= link_to "Logout", destroy_user_session_path, method: :delete, :class => "btn btn-lg btn-primary"  %>
+  <% else %>
+  	<%= link_to "Sign up", new_user_registration_path, :class => "btn btn-lg btn-primary" %> 
+  	<%= link_to "Login", new_user_session_path, :class => "btn btn-lg btn-primary"  %>
+  <% end %>
+ 
 </div>
 
