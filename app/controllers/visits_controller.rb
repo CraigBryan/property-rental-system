@@ -1,5 +1,5 @@
 class VisitsController < ApplicationController
-  #TODO only allow users to do things here
+  before_action :ensure_customer
 
   def new
     @visit = Visit.new
@@ -18,10 +18,16 @@ class VisitsController < ApplicationController
 
   #lists the visits and properties for the current user
   def list
-    #TODO set visits to an array of visits that are associated with the current user
+    @visits = Visit.find_by :id, current_user.id
   end
 
   def visit_params
     params.require(:visit).permit(:date, :time)
+  end
+
+  private:
+
+  def ensure_customer
+    render "not_authorized" unless current_user.is_role_by_name?("customer")  
   end
 end
