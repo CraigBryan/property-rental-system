@@ -3,7 +3,7 @@
 <% if @properties.size == 0 %>
   <p>No properties found</p>
 <% else %>
-  <% properties.each do |prop| %>
+  <% @properties.each do |prop| %>
     <p>
       <%= prop.address %>
     </p>

@@ -3,25 +3,35 @@
 <%= form_for @property do |prop_form| %>
 
   <%= prop_form.label :prop_type %>
-  <%= prop_form.text_field :prop_type %>
+  <%= prop_form.radio_button :prop_type, "house" %>
+  <%= prop_form.label :house_type, "House" %>
+  <%= prop_form.radio_button :prop_type, "apartment" %>
+  <%= prop_form.label :apt_type, "Apartment" %>
+  <br>
 
   <%= prop_form.label :address %>
   <%= prop_form.text_field :address %>
+  <br>
 
   <%= prop_form.label :location %>
   <%= prop_form.text_field :location %>
+  <br>
 
   <%= prop_form.label :number_bathrooms %>
   <%= prop_form.text_field :number_bathrooms %>
+  <br>
 
   <%= prop_form.label :number_bedrooms %>
   <%= prop_form.text_field :number_bedrooms %>
+  <br>
 
   <%= prop_form.label :number_other_rooms %>
   <%= prop_form.text_field :number_other_rooms %>
+  <br>
 
   <%= prop_form.label :rent_price %>
   <%= prop_form.text_field :rent_price %>
+  <br>
 
   <%= prop_form.submit "Add Property" %>
 <% end %> 
