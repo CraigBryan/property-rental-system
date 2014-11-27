@@ -14,23 +14,26 @@
   <br>
 
   <%= prop_form.label :location %>
-  <%= prop_form.text_field :location %>
+  <%= prop_form.collection_select(:location, 
+                                  Location.all, 
+                                  :name, 
+                                  :name) %>
   <br>
 
   <%= prop_form.label :number_bathrooms %>
-  <%= prop_form.text_field :number_bathrooms %>
+  <%= prop_form.number_field :number_bathrooms, :min => 0 %>
   <br>
 
   <%= prop_form.label :number_bedrooms %>
-  <%= prop_form.text_field :number_bedrooms %>
+  <%= prop_form.number_field :number_bedrooms, :min => 0 %>
   <br>
 
   <%= prop_form.label :number_other_rooms %>
-  <%= prop_form.text_field :number_other_rooms %>
+  <%= prop_form.number_field :number_other_rooms, :min => 0 %>
   <br>
 
   <%= prop_form.label :rent_price %>
-  <%= prop_form.text_field :rent_price %>
+  <%= prop_form.number_field :rent_price, :min => 0 %>
   <br>
 
   <%= prop_form.submit "Add Property" %>

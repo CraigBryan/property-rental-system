@@ -10,11 +10,11 @@ class Property < ActiveRecord::Base
                         :number_bedrooms,
                         :number_bathrooms,
                         :number_other_rooms,
-                        :rent_price,
-                        :deleted
+                        :rent_price
 
   validates :number_bedrooms, :numericality => { :greater_or_equal_to  => 0 }
   validates :number_bathrooms, :numericality => { :greater_or_equal_to  => 0 }
   validates :number_other_rooms, :numericality => { :greater_or_equal_to  => 0 }
   validates :rent_price, :numericality => { :greater_or_equal_to  => 0 }
+
 end

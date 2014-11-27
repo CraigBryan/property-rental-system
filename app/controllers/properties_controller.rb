@@ -6,8 +6,9 @@ class PropertiesController < ApplicationController
   def create
     @property = Property.new property_params
     if @property.save
-      redirect_to action: 'index'
+      redirect_to action: 'index' #TODO do something more logical instead
     else
+      puts @property.errors.full_messages
       render 'new'
     end
   end

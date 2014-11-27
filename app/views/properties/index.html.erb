@@ -5,7 +5,13 @@
 <% else %>
   <% @properties.each do |prop| %>
     <p>
+      <%= prop.id %>
+      <%= prop.prop_type %>
       <%= prop.address %>
+      <%= prop.location %>
+      <%= prop.number_bathrooms %>
+      <%= prop.number_bedrooms %>
+      <%= prop.rent_price %>
     </p>
   <% end %>
 <% end %>
