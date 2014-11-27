@@ -1,0 +1,18 @@
+<!-- This is the view after a customer viewing a property hits
+     "add to visiting list". They should need to just select a 
+     date and time (the property and customer ids should be
+     available from context -->
+<h1>Add to visiting list</h1>
+
+<%= form_for @visit do |v| %>
+
+  <%= prop_form.label :date %>
+  <%= prop_form.date_field :date %>
+  <br>
+
+  <%= prop_form.label :time %>
+  <%= prop_form.time_field :time %>
+  <br>
+
+  <%= prop_form.submit "Add to Visiting List" %>
+<% end %>

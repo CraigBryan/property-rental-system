@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :properties
+  resources :visits
 
   get 'visits/list'
 
