@@ -1,6 +1,6 @@
 <h1>Add property</h1>
 
-<%= form_for @property do |prop_form| %>
+<%= form_for @property, :html => {:multipart => true} do |prop_form| %>
 
   <%= prop_form.label :prop_type %>
   <%= prop_form.radio_button :prop_type, "house" %>
@@ -35,6 +35,12 @@
   <%= prop_form.label :rent_price %>
   <%= prop_form.number_field :rent_price, :min => 0 %>
   <br>
+
+  <h3>Photos</h3>
+  <% 5.times do |i| %>
+    <%= file_field_tag "photos#{i}"%>
+    <br>
+  <% end %>
 
   <%= prop_form.submit "Add Property" %>
 <% end %> 

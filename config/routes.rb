@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :properties
   resources :visits
+  
+  devise_for :users
 
   get 'visits/list'
 

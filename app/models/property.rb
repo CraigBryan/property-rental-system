@@ -2,9 +2,9 @@ class Property < ActiveRecord::Base
   has_many :visits, :dependent => :destroy
   has_many :photos, :dependent => :destroy
   has_many :leases, :dependent => :destroy
-  belongs_to :owner_account
+  belongs_to :user
 
-  validates_presence_of :owner_account,
+  validates_presence_of :user,
                         :prop_type,
                         :address,
                         :number_bedrooms,
@@ -16,5 +16,4 @@ class Property < ActiveRecord::Base
   validates :number_bathrooms, :numericality => { :greater_or_equal_to  => 0 }
   validates :number_other_rooms, :numericality => { :greater_or_equal_to  => 0 }
   validates :rent_price, :numericality => { :greater_or_equal_to  => 0 }
-
 end
