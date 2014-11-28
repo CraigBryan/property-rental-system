@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'users/index'
-
+  resources :users
   devise_for :users
   get 'visits/list'
 
