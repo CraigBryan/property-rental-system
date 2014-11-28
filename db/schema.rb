@@ -103,8 +103,10 @@ ActiveRecord::Schema.define(version: 20141128014533) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "property_id"
+    t.integer  "user_id"
   end
 
   add_index "visits", ["property_id"], name: "index_visits_on_property_id", using: :btree
+  add_index "visits", ["user_id"], name: "index_visits_on_user_id", using: :btree
 
 end
