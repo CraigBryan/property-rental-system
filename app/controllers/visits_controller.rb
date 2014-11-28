@@ -26,6 +26,7 @@ class VisitsController < ApplicationController
 
   def destroy
     Visit.find(params[:id]).destroy
+    flash[:notice] = "Visit successfully destroyed"
     redirect_to visits_path
   end
 
