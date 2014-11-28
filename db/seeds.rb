@@ -14,6 +14,7 @@ Role.all.each {|r| r.destroy}
 Location.all.each {|l| l.destroy}
 Photo.all.each {|p| p.destroy}
 Property.all.each {|p| p.destroy}
+Visit.all.each {|v| v.destroy}
 
 # Also delete uploaded files
 FileUtils.rm_rf(Dir.glob(Rails.root.join('public/uploads/*')))
