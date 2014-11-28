@@ -4,7 +4,7 @@ class Property < ActiveRecord::Base
   has_many :leases, :dependent => :destroy
   belongs_to :user
 
-  validates_presence_of :user
+  validates_presence_of :user,
                         :prop_type,
                         :address,
                         :number_bedrooms,
