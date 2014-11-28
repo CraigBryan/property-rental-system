@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   #resources :users
   devise_for :users
   get 'visits/list'
-
   get 'visits/view_list'
 
   root 'opr_system#home'

@@ -3,3 +3,8 @@
 <% if admin? %>
 	<%= link_to "Add New Users", new_user_path %>
 <% end %>
+
+<% @users = User.all %>
+<% @users.each do |user| %>
+    <%= user.email %><br/>
+<% end %>
