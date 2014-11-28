@@ -14,7 +14,6 @@ class VisitsController < ApplicationController
     if @visit.save
       render "list"
     else
-      puts @visit.errors.full_messages
       render "new" #TODO make more sense
     end
   end
