@@ -10,11 +10,10 @@
    <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav pull-right">
       	<% if user_signed_in? %>
-  			<!--<%= link_to 'Edit profile', edit_user_registration_path, :class => "btn btn-lg btn-primary" %> -->
-  			<%= link_to "Logout", destroy_user_session_path, method: :delete, :class => "btn btn-lg btn-primary"  %>
+  			<!--<li><%= link_to 'Edit profile', edit_user_registration_path %></li> -->
+  			<li><%= link_to "Logout", destroy_user_session_path, method: :delete%></li>
   		<% else %>
-  			<%= link_to "Sign up", new_user_registration_path, :class => "btn btn-lg btn-primary" %> 
-  			<%= link_to "Login", new_user_session_path, :class => "btn btn-lg btn-primary"  %>
+  			<li><%= link_to "Login", new_user_session_path%></li>
   		<% end %>
         <li><%= link_to "Help", help_path %></li>
       </ul>

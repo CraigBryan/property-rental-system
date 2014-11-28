@@ -1,31 +1,33 @@
-<!-- TODO styling! -->
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
 
-<% if @visits.nil? %>
+    <% if @visits.nil? %>
 
-  <p>Nothing in your visiting list</p>
+      <p>Nothing in your visiting list</p>
 
-<% else %>
+    <% else %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Date</th>
-      <th>Time</th>
-    </tr>
-  </thead>
+    <table>
+      <thead>
+        <tr>
+          <th>Property</th>
+          <th>Date</th>
+          <th>Time</th>
+        </tr>
+      </thead>
 
-  <tbody>
+      <tbody>
 
-    <% @visits.each do |visit| %>
-    <tr>
-      <td><%= link_to visit.property.name, visit.property %></td>
-      <td><%= visit.date %></td>
-      <td><%= visit.time %></td>
-    </tr>
+        <% @visits.each do |visit| %>
+        <tr>
+          <td><%= link_to visit.property.name, visit.property %></td>
+          <td><%= visit.date %></td>
+          <td><%= visit.time %></td>
+        </tr>
+        <% end %>
+
+      </tbody>
+    </table>
     <% end %>
-
-  </tbody>
-</table>
-
-<% end %>
+  </div>
+</div>
