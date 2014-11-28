@@ -19,9 +19,13 @@ class VisitsController < ApplicationController
     end
   end
 
-  #lists the visits and properties for the current user
   def index
     @visits = Visit.where("user_id = ?", current_user.id)
+  end
+
+  def destroy
+    Visit.find(params[:id]).destroy
+    redirect_to visits_path
   end
 
   private

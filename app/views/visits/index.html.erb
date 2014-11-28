@@ -16,11 +16,12 @@
     <tbody>
 
       <% @visits.each do |visit| %>
-      <tr>
-        <td><%= link_to visit.property.address, visit.property %></td>
-        <td><%= visit.date %></td>
-        <td><%= visit.time %></td>
-      </tr>
+        <tr>
+          <td><%= link_to visit.property.address, visit.property %></td>
+          <td><%= visit.date %></td>
+          <td><%= visit.time %></td>
+          <td><%= button_to "Remove from visiting list", visit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
       <% end %>
 
     </tbody>
