@@ -54,11 +54,13 @@ class PropertiesController < ApplicationController
   end
 
   def customer_index
-    if(has_filters?)
-      @properties = Property.where("deleted != ?", true)
-    else
+    @properties = Property.where("deleted != ?", true)
+    
+    if has_filters?
       @properties = filter_properties @properties, params[:search]
     end
+
+    #TODO, if no filters, give an error
   end
 
   def destroy 

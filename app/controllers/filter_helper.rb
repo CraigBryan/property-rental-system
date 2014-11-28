@@ -1,4 +1,6 @@
 module FilterHelper
+
+  #This is WET code. Gross.
   def filter_properties filterable, filters
 
     #filter by location
