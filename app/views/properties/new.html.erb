@@ -1,46 +1,52 @@
-<h1>Add property</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
 
-<%= form_for @property, :html => {:multipart => true} do |prop_form| %>
+    <h1>Add property</h1>
 
-  <%= prop_form.label :prop_type %>
-  <%= prop_form.radio_button :prop_type, "house" %>
-  <%= prop_form.label :house_type, "House" %>
-  <%= prop_form.radio_button :prop_type, "apartment" %>
-  <%= prop_form.label :apt_type, "Apartment" %>
-  <br>
+    <%= form_for @property, :html => {:multipart => true} do |prop_form| %>
 
-  <%= prop_form.label :address %>
-  <%= prop_form.text_field :address %>
-  <br>
+      <%= prop_form.label :prop_type %>
+      <br>
+      <%= prop_form.label :house_type, "House" %>
+      <%= prop_form.radio_button :prop_type, "house"%>
+      <%= prop_form.label :apt_type, "Apartment" %>
+      <%= prop_form.radio_button :prop_type, "apartment"%>
+      <br>
 
-  <%= prop_form.label :location %>
-  <%= prop_form.collection_select(:location, 
-                                  Location.all, 
-                                  :name, 
-                                  :name) %>
-  <br>
+      <%= prop_form.label :address %>
+      <%= prop_form.text_field :address, class: 'form-control'%>
+      <br>
 
-  <%= prop_form.label :number_bathrooms %>
-  <%= prop_form.number_field :number_bathrooms, :min => 0 %>
-  <br>
+      <%= prop_form.label :location %>
+      <%= prop_form.collection_select(:location,
+                                      Location.all,
+                                      :name,
+                                      :name)%>
+      <br>
+      <br>
 
-  <%= prop_form.label :number_bedrooms %>
-  <%= prop_form.number_field :number_bedrooms, :min => 0 %>
-  <br>
+      <%= prop_form.label :number_bathrooms %>
+      <%= prop_form.number_field :number_bathrooms, :min => 0, class: 'form-control' %>
+      <br>
 
-  <%= prop_form.label :number_other_rooms %>
-  <%= prop_form.number_field :number_other_rooms, :min => 0 %>
-  <br>
+      <%= prop_form.label :number_bedrooms %>
+      <%= prop_form.number_field :number_bedrooms, :min => 0, class: 'form-control' %>
+      <br>
 
-  <%= prop_form.label :rent_price %>
-  <%= prop_form.number_field :rent_price, :min => 0 %>
-  <br>
+      <%= prop_form.label :number_other_rooms %>
+      <%= prop_form.number_field :number_other_rooms, :min => 0, class: 'form-control' %>
+      <br>
 
-  <h3>Photos</h3>
-  <% 5.times do |i| %>
-    <%= file_field_tag "photos#{i}"%>
-    <br>
-  <% end %>
+      <%= prop_form.label :rent_price %>
+      <%= prop_form.number_field :rent_price, :min => 0, class: 'form-control'%>
 
-  <%= prop_form.submit "Add Property" %>
-<% end %> 
+      <h3>Photos</h3>
+      <% 5.times do |i| %>
+        <%= file_field_tag "photos#{i}"%>
+        <br>
+      <% end %>
+
+      <%= prop_form.submit "Add Property", class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>

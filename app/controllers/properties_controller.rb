@@ -6,6 +6,7 @@ class PropertiesController < ApplicationController
 
   def new
     @property = Property.new
+    flash[:notice] = "Property successfully added"
   end
 
   def create
@@ -16,7 +17,7 @@ class PropertiesController < ApplicationController
 
       5.times do |i|
         unless params["photos#{i}"] == "" || params["photos#{i}"].nil?
-          Photo.new({:file => upload_photo(params["photos#{i}"], i), 
+          Photo.new({:file => upload_photo(params["photos#{i}"], i),
                      :property => @property}).save
         end
       end
@@ -26,6 +27,13 @@ class PropertiesController < ApplicationController
       puts @property.errors.full_messages
       render 'new'
     end
+  end
+
+  #Added destroy action
+  def destroy
+    Property.find(params[:id]).destroy
+    flash[:notice] = "Property successfully destroyed"
+    redirect_to properties_path
   end
 
   def index
@@ -41,16 +49,8 @@ class PropertiesController < ApplicationController
   def owner_index
     @properties = Property.where(":user_id = ?", current_user.id)
 
-    if params[:page].nil?
-      @page = 1
-    else
-      @page = params[:page]
-    end
-
-    @less_pages = !@page == 1 
-    @more_pages = @properties > @page * 25
-
-    @properties.slice!(25 * @page - 1, 25)
+    @properties = Property.all
+    @properties = Property.paginate(page: params[:page])
   end
 
   def customer_index
@@ -82,14 +82,14 @@ class PropertiesController < ApplicationController
   end
 
   def ensure_authorized
-    unless(current_user.is_role_by_name?("admin") || 
+    unless(current_user.is_role_by_name?("admin") ||
            current_user.is_role_by_name?("owner"))
       render 'common/not_authorized'
-    end    
+    end
   end
 
   def upload_photo file_io, index
-    file_name = Rails.root.join('public', 'uploads', @property.id.to_s) 
+    file_name = Rails.root.join('public', 'uploads', @property.id.to_s)
 
     FileUtils::mkdir_p file_name
 
