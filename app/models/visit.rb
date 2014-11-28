@@ -1,9 +1,9 @@
 class Visit < ActiveRecord::Base
   belongs_to :property
-  belongs_to :customer_account
+  belongs_to :user
 
   validates_presence_of :property, 
-                        :customer_account, 
+                        :user, 
                         :time, 
                         :date
 end

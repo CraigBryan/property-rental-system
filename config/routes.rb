@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
   resources :properties
+  resources :visits
   
   devise_for :users
-
-  get 'visits/list'
 
   root 'opr_system#home'
   get 'help' => 'opr_system#help'
