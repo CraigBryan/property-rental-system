@@ -17,3 +17,7 @@
 
 # ignore database config 
 /config/database.yml
+
+# ignore uploaded photo files
+/public/uploads/*
+!/public/uploads/README.txt

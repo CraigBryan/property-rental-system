@@ -1,3 +1,5 @@
+require 'fileutils'
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
@@ -6,10 +8,17 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+# Running db:seed will first clear everything out
 User.all.each {|u| u.destroy}
 Role.all.each {|r| r.destroy}
 Location.all.each {|l| l.destroy}
+Photo.all.each {|p| p.destroy}
+Property.all.each {|p| p.destroy}
 
+# Also delete uploaded files
+FileUtils.rm_rf(Dir.glob(Rails.root.join('public/uploads/*')))
+
+# Seed the database with common values
 Location.new(:name => "Downtown").save
 Location.new(:name => "Lowertown").save
 Location.new(:name => "Byward Market").save
