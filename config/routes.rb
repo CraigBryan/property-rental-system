@@ -4,8 +4,6 @@ Rails.application.routes.draw do
   
   devise_for :users
 
-  get 'visits/list'
-
   root 'opr_system#home'
   get 'help' => 'opr_system#help'
   get 'contact' => 'opr_system#contact'
