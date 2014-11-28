@@ -27,6 +27,13 @@ class PropertiesController < ApplicationController
     end
   end
 
+  #Added destroy action
+  def destroy
+    Property.find(params[:id]).destroy
+    flash[:notice] = "Property successfully destroyed"
+    redirect_to properties_path
+  end
+
   def index
     @properties = Property.all
     @properties = Property.paginate(page: params[:page])
