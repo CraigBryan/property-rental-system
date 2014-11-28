@@ -13,15 +13,14 @@ class VisitsController < ApplicationController
     @visit.property = Property.find params[:visit][:property]
 
     if @visit.save
-      render "visits/show"
+      redirect_to visits_path
     else
       render "common/error"
     end
   end
 
   #lists the visits and properties for the current user
-  def show
-    puts "ACTION CALLED, ASSHOLE"
+  def index
     @visits = Visit.where("user_id = ?", current_user.id)
   end
 
