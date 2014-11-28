@@ -2,6 +2,8 @@
   <div class="col-md-6 col-md-offset-3">
     <h1> Properties </h1>
 
+    <%= will_paginate %>
+
     <% if @properties.size == 0 %>
       <p>No properties found</p>
     <% else %>
@@ -32,5 +34,6 @@
       </tbody>
       </table>
     <% end %>
+    <%= will_paginate %>
   </div>
 </div>

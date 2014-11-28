@@ -1,30 +1,38 @@
-<% if @visits.size == 0 || @visits.nil? %>
+<!-- Styling has not been tested yet -->
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
 
-  <p>Nothing in your visiting list</p>
+    <% if @visits.size == 0 || @visits.nil? %>
 
-<% else %>
+      <p>Nothing in your visiting list</p>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Property</th>
-        <th>Date</th>
-        <th>Time</th>
-      </tr>
-    </thead>
+    <% else %>
 
-    <tbody>
+      <%= will_paginate %>
 
-      <% @visits.each do |visit| %>
-        <tr>
-          <td><%= link_to visit.property.address, visit.property %></td>
-          <td><%= visit.date %></td>
-          <td><%= visit.time %></td>
-          <td><%= button_to "Remove from visiting list", visit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Date</th>
+            <th>Time</th>
+          </tr>
+        </thead>
 
-    </tbody>
-  </table>
+        <tbody>
 
-<% end %>
+          <% @visits.each do |visit| %>
+            <tr class="text-center">
+              <td><%= link_to visit.property.address, visit.property %></td>
+              <td><%= visit.date %></td>
+              <td><%= visit.time %></td>
+              <td><%= button_to "Remove from visiting list", visit, method: :delete, data: { confirm: 'Are you sure?' } %></td> <!-- Is the same as a button to bootstrap?-->
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+    <% end %>
+    <%= will_paginate %>
+  </div>
+</div>

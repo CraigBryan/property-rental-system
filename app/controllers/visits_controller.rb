@@ -21,6 +21,7 @@ class VisitsController < ApplicationController
 
   def index
     @visits = Visit.where("user_id = ?", current_user.id)
+    @visits  = Visit.paginate(page: params[:page])
   end
 
   def destroy
@@ -35,6 +36,6 @@ class VisitsController < ApplicationController
   end
 
   def ensure_authorized
-    render "common/not_authorized" unless current_user.is_role_by_name?("customer")  
+    render "common/not_authorized" unless current_user.is_role_by_name?("customer")
   end
 end

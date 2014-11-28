@@ -15,7 +15,7 @@ class PropertiesController < ApplicationController
 
       5.times do |i|
         unless params["photos#{i}"] == "" || params["photos#{i}"].nil?
-          Photo.new({:file => upload_photo(params["photos#{i}"], i), 
+          Photo.new({:file => upload_photo(params["photos#{i}"], i),
                      :property => @property}).save
         end
       end
@@ -29,6 +29,7 @@ class PropertiesController < ApplicationController
 
   def index
     @properties = Property.all
+    @properties = Property.paginate(page: params[:page])
   end
 
   private
@@ -44,14 +45,14 @@ class PropertiesController < ApplicationController
   end
 
   def ensure_authorized
-    unless(current_user.is_role_by_name?("admin") || 
+    unless(current_user.is_role_by_name?("admin") ||
            current_user.is_role_by_name?("owner"))
       render 'common/not_authorized'
-    end    
+    end
   end
 
   def upload_photo file_io, index
-    file_name = Rails.root.join('public', 'uploads', @property.id.to_s) 
+    file_name = Rails.root.join('public', 'uploads', @property.id.to_s)
 
     FileUtils::mkdir_p file_name
 
