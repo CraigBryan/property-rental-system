@@ -5,17 +5,32 @@
     <% if @properties.size == 0 %>
       <p>No properties found</p>
     <% else %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Type</th>
+          <th>Address</th>
+          <th>Location</th>
+          <th>Number of Bathrooms</th>
+          <th>Number of Bedrooms</th>
+          <th>Rent Price</th>
+        </tr>
+      </thead>
+      <tbody>
       <% @properties.each do |prop| %>
-        <p>
-          <%= prop.id %>
-          <%= prop.prop_type %>
-          <%= prop.address %>
-          <%= prop.location %>
-          <%= prop.number_bathrooms %>
-          <%= prop.number_bedrooms %>
-          <%= prop.rent_price %>
-        </p>
+            <tr class="text-center">
+              <td><%= prop.id %></td>
+              <td><%= prop.prop_type %></td>
+              <td><%= prop.address %></td>
+              <td><%= prop.location %></td>
+              <td><%= prop.number_bathrooms %></td>
+              <td><%= prop.number_bedrooms %></td>
+              <td><%= prop.rent_price %></td>
+            </tr>
       <% end %>
+      </tbody>
+      </table>
     <% end %>
   </div>
 </div>
