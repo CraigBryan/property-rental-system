@@ -1,6 +1,7 @@
 require 'fileutils'
 
 class PropertiesController < ApplicationController
+  include FilterHelper
   before_action :ensure_authorized, :only => [:new, :create, :destroy]
 
   def new
@@ -53,6 +54,11 @@ class PropertiesController < ApplicationController
   end
 
   def customer_index
+    if(has_filters?)
+      @properties = Property.where("deleted != ?", true)
+    else
+      @properties = filter_properties @properties, params[:search]
+    end
   end
 
   def destroy 
@@ -91,5 +97,10 @@ class PropertiesController < ApplicationController
     end
 
     return file_name.to_s
+  end
+
+  #TODO improve this for an array of empty string, maybe
+  def has_filters?
+    params[:search].nil?
   end
 end
