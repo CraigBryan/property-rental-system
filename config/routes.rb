@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'admins/new_user'
+
+  get 'admins/create_user'
+
   #get 'users/index'
   #resources :users
   devise_for :users
