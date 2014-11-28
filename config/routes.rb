@@ -5,10 +5,11 @@ Rails.application.routes.draw do
   get 'visits/list'
   get 'visits/view_list'
 
-  root 'opr_system#home'
-  get 'help' => 'opr_system#help'
-  get 'contact' => 'opr_system#contact'
-  get 'about' => 'opr_system#about'
+  root 'pages#home'
+  get 'help' => 'pages#help'
+  get 'contact' => 'pages#contact'
+  get 'about' => 'pages#about'
+  get "/all_users" => "pages#all_users"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
