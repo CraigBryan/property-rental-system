@@ -1,18 +1,21 @@
 class VisitsController < ApplicationController
-  before_action :ensure_customer
+  before_action :ensure_authorized
 
   def new
     @visit = Visit.new
+    @property = Property.find(params[:property])
   end
 
   def create
     @visit = Visit.new(visit_params)
     @visit.user = current_user
+    @visit.property = Property.find(params[:visit][:property])
 
     if @visit.save
       render "list"
     else
-      render "not_authorized" #TODO make more sense
+      puts @visit.errors.full_messages
+      render "new" #TODO make more sense
     end
   end
 
@@ -21,13 +24,13 @@ class VisitsController < ApplicationController
     @visits = Visit.find_by :id, current_user.id
   end
 
+  private
+
   def visit_params
-    params.require(:visit).permit(:date, :time)
+    { :date => params[:visit][:date], :time => params[:visit][:time] }
   end
 
-  private:
-
-  def ensure_customer
-    render "not_authorized" unless current_user.is_role_by_name?("customer")  
+  def ensure_authorized
+    render "common/not_authorized" unless current_user.is_role_by_name?("customer")  
   end
 end

@@ -6,8 +6,8 @@
 
 <%= form_for @visit do |visit_form| %>
 
-  <%= visit_form.label :user %>
-  <%= visit_form.hidden_field :user, :value => params[:property] %>
+  <%= visit_form.label @property.address %>
+  <%= visit_form.hidden_field :property, :value => @property.id %>
   <br>
 
   <%= visit_form.label :date %>
