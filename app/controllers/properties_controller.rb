@@ -1,7 +1,7 @@
 require 'fileutils'
 
 class PropertiesController < ApplicationController
-  before_action :ensure_authorized, :only => [:new, :create]
+  before_action :ensure_authorized, :only => [:new, :create, :destroy]
 
   def new
     @property = Property.new
@@ -28,7 +28,37 @@ class PropertiesController < ApplicationController
   end
 
   def index
-    @properties = Property.all
+    if current_user.is_role_by_name?("owner")
+      owner_index
+      render 'index'
+    else
+      customer_index
+      render 'customer_index'
+    end
+  end
+
+  def owner_index
+    @properties = Property.where(":user_id = ?", current_user.id)
+
+    if params[:page].nil?
+      @page = 1
+    else
+      @page = params[:page]
+    end
+
+    @less_pages = !@page == 1 
+    @more_pages = @properties > @page * 25
+
+    @properties.slice!(25 * @page - 1, 25)
+  end
+
+  def customer_index
+  end
+
+  def destroy 
+    prop = Property.find(params[:id]).deleted = true
+    prop.save
+    redirect_to properties_path
   end
 
   private
