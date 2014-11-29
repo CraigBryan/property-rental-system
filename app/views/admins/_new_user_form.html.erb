@@ -7,12 +7,29 @@
 
 	<div>
 		<%= f.label :role %><br>
-		<%= collection_radio_buttons :role, :roles, Role.all, :id, :name %>	
+		<% num = 0 %>
+		<%= collection_radio_buttons :role, :roles, Role.all, :id, :name do |b| %>
+			<%= b.label %>
+			<%= b.label { b.radio_button(id: num)} %>
+			<% num += 1 %>
+		<% end %>	
 	</div>
 
-	<% if defined?(role) %>
-		
-	<% end %>
+	<div>
+		<%= f.label :first_name %><br>
+		<%= f.text_field :first_name %><br>
+	</div>
+	
+	<div>
+		<%= f.label :last_name %><br>
+		<%= f.text_field :last_name %><br>
+	</div>
+
+	<div id="customer_name" style="display: none">
+		<%= f.label :max_rent %><br>
+		<%= f.text_field :max_rent %><br>
+	
+	</div>	
 
 	<div>
 		<%= f.label :password %><br>
