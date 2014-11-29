@@ -144,11 +144,8 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap-sass
-<<<<<<< HEAD
   bootstrap-will_paginate
-=======
   cancan
->>>>>>> login
   coffee-rails (~> 4.0.0)
   devise (~> 3.4.1)
   jbuilder (~> 2.0)
