@@ -39,11 +39,15 @@
                 
               <% if @photos.nil? || @photos.size == 0 %>
                 
-              <%else%>
+              <% else %>
                 <% @photos[prop.id].each do |photo| %>
-                  <td><p>photo.file</p></td>
-                <%end%>
-              <%end%>
+                  <td>
+                    <%= image_tag photo, 
+                                  size: "50x50", 
+                                  alt: "Property photo" %>
+                  </td>
+                <% end %>
+              <% end %>
 
               <td><%= prop.id %></td>
               <td><%= prop.prop_type %></td>

@@ -45,7 +45,7 @@ class PropertiesController < ApplicationController
       Photo.where("property_id = ?", prop.id).each do |photo|
         property_photo.push(photo.file)
       end
-      @photos[:property_id] = property_photo
+      @photos[prop.id] = property_photo
     end
   end
 
@@ -69,15 +69,18 @@ class PropertiesController < ApplicationController
   end
 
   def upload_photo file_io, index
-    file_name = Rails.root.join('public', 'uploads', @property.id.to_s)
+    photo_name = "uploads/" + @property.id.to_s 
+    file_name = Rails.root.join('app', 'assets', 'images', photo_name)
 
     FileUtils::mkdir_p file_name
 
+    photo_name = photo_name + "/" +file_io.original_filename
     file_name = file_name.join(file_io.original_filename)
+
     File.open(file_name, 'wb') do |file|
       file.write(file_io.read)
     end
 
-    return file_name.to_s
+    return photo_name.to_s
   end
 end

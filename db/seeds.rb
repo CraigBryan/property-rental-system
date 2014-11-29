@@ -17,7 +17,7 @@ Property.all.each {|p| p.destroy}
 Visit.all.each {|v| v.destroy}
 
 # Also delete uploaded files
-FileUtils.rm_rf(Dir.glob(Rails.root.join('public/uploads/*')))
+FileUtils.rm_rf(Dir.glob(Rails.root.join('app/assets/images/uploads/*')))
 
 # Seed the database with common values
 Location.new(:name => "Downtown").save
