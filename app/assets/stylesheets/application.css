@@ -13,3 +13,8 @@
  *= require_tree .
  *= require_self
  */
+ 
+ #logged_as {
+ 	margin-left: 18px;
+ 	color:blue;
+ }
