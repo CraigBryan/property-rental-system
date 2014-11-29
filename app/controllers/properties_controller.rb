@@ -1,7 +1,8 @@
 require 'fileutils'
 
 class PropertiesController < ApplicationController
-  before_action :ensure_authorized, :only => [:new, :create]
+  include FilterHelper
+  before_action :ensure_authorized, :only => [:new, :create, :destroy]
 
   def new
     @property = Property.new
@@ -27,25 +28,44 @@ class PropertiesController < ApplicationController
     end
   end
 
-  #Added destroy action
-  def destroy
-    Property.find(params[:id]).destroy
-    flash[:notice] = "Property successfully destroyed"
-    redirect_to properties_path
+  def edit
+
   end
 
   def index
-    @properties = Property.all
-    @properties = Property.paginate(page: params[:page])
-    @photos = {}
-
-    @properties.each do |prop|
-      property_photo = []
-      Photo.where("property_id = ?", prop.id).each do |photo|
-        property_photo.push(photo.file)
-      end
-      @photos[prop.id] = property_photo
+    if current_user.is_role_by_name?("owner")
+      success = owner_index
+    else
+      success = customer_index
     end
+
+    @properties = Property.all
+    @properties = @properties.paginate(page: params[:page])
+
+    if success
+      render 'index'
+    else
+      render 'common/error'
+    end
+      
+  end
+
+  def search
+    if(current_user.is_role_by_name?("customer") ||
+       current_user.is_role_by_name?("admin"))
+      @search_params = SearchParams.new
+      render 'search'
+    else
+      render 'common/error'
+    end
+  end
+
+  def destroy 
+    prop = Property.find(params[:id])
+    prop.deleted = true
+    prop.save
+    flash[:notice] = "Property successfully deleted"
+    redirect_to properties_path
   end
 
   private
@@ -81,5 +101,44 @@ class PropertiesController < ApplicationController
     end
 
     return photo_name.to_s
+  end
+
+  def owner_index
+    @properties = Property.where(":user_id = ?", current_user.id)
+
+    return true
+  end
+
+  def customer_index
+    @properties = Property.where("deleted != ?", true)
+    
+    if has_filters?
+      @properties = filter_properties(@properties, params[:search])
+      return true
+    else
+      flash[:notice] = "Error, no search terms entered"
+      return false
+    end
+  end
+
+  def has_filters?
+    search_params = params[:search]
+
+    result = false
+
+    search_params['locations'].each do |loc|
+      result = true unless loc == ""
+    end
+
+    search_params['types'].each do |loc|
+      result = true unless loc == ""
+    end
+
+    result = true unless search_params["number_bedrooms"] == ""
+    result = true unless search_params["number_bathrooms"] == ""
+    result = true unless search_params["min_rent"] == ""
+    result = true unless search_params["max_rent"] == ""
+
+    result
   end
 end

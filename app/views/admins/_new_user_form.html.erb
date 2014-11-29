@@ -1,0 +1,27 @@
+<%= form_for @user, url: admins_create_user_by_admin_path do |f| %>
+  	
+  	<div>
+		<%= f.label :email %><br>
+		<%= f.text_field :email %><br>
+	</div>
+
+	<div>
+		<%= f.label :role %><br>
+		<%= collection_radio_buttons :role, :roles, Role.all, :id, :name %>	
+	</div>
+
+	<div>
+		<%= f.label :password %><br>
+		<%= f.text_field :password %><br>
+	</div>
+
+	<div>
+		<%= f.label :password_confirmation %><br>
+		<%= f.text_field :password_confirmation %><br>
+	</div>
+
+	<div>
+		<%= f.submit %>
+	</div>
+
+<% end %>

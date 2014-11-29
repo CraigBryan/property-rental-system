@@ -1,13 +1,29 @@
 Rails.application.routes.draw do
-  resources :properties
+
+  resources :properties do
+    collection do
+      get :search
+    end
+  end
+
   resources :visits
   
   devise_for :users
 
-  root 'opr_system#home'
-  get 'help' => 'opr_system#help'
-  get 'contact' => 'opr_system#contact'
-  get 'about' => 'opr_system#about'
+  get 'admins/new_user_by_admin'
+  post 'admins/create_user_by_admin'
+
+  get 'visits/list'
+  get 'visits/view_list'
+
+  root 'pages#home'
+  get 'help' => 'pages#help'
+  get 'contact' => 'pages#contact'
+  get 'about' => 'pages#about'
+  get "/all_users" => "pages#all_users"
+
+  #get "admins/new_user_by_admin" => "admins#new_user", as: :admins_new_user_by_admin
+  #post "admins/create_user_by_admin/:id" => "admins#create_user", as: :admins_create_user_by_admin
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

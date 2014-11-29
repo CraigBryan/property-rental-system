@@ -2,7 +2,9 @@
   <div class="col-md-6 col-md-offset-3">
     <h1 class="text-center"> Properties </h1>
 
-    <%= will_paginate %>
+    <% if @properties.size != 0 %>
+      <%= will_paginate %>
+    <% end %>
 
     <% if @properties.size == 0 %>
       <% if current_user.is_role_by_name?("owner") %>
@@ -62,9 +64,10 @@
               <td><%= prop.rent_price %></td>
 
               <% if current_user.is_role_by_name?("owner")%>
-                <td> <!-- Edit-->
-                  <%= link_to prop, method: :get, class: "btn-primary btn-xs button" do %>
-                    <span class="glyphicon glyphicon-pencil"></span>
+              
+                <td> <!-- Edit -->
+                  <%= link_to edit_property_path(prop.id), class: "btn-danger btn-xs " do %>
+                    <span class="glyphicon glyphicon-trash"></span>
                   <% end %>
                 </td>
 
@@ -87,7 +90,9 @@
       </table>
     <% end %>
 
-    <%= will_paginate %>
+    <% if @properties.size != 0 %>
+      <%= will_paginate %>
+    <% end %>
 
   </div>
 </div>

@@ -6,19 +6,24 @@
 
    <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav pull-right">
-        <li><%= link_to "Help", help_path %></li>
-        <% if user_signed_in? %>
-  			 <!--<li><%= link_to 'Edit profile', edit_user_registration_path %></li> -->
-          <li><%= link_to "Properties", properties_path %></li>
+        <% if admin? %>
+          <%= link_to "All Users", all_users_path, :class => "btn btn-lg btn-primary"  %>
+        <% end %>
+        <!--<% if admin? %>
+          <%= link_to "Create New User ", new_user_registration_path %><br />
+        <% end %>-->
 
-          <% if current_user.is_role_by_name?("customer") %>
-            <li><%= link_to "Visits", visits_path %></li>
-          <%end%>
+      	<% if user_signed_in? %>
 
-          <li><%= link_to "Logout", destroy_user_session_path, method: :delete%></li>
+  			  <!--<%= link_to 'Edit profile', edit_user_registration_path, :class => "btn btn-lg btn-primary" %> -->
+  			  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => "btn btn-lg btn-primary"  %>
   		  <% else %>
-  			 <li><%= link_to "Login", new_user_session_path%></li>
+  			  <!--<%= link_to "Sign up", new_user_registration_path, :class => "btn btn-lg btn-primary" %>--> 
+  			  <%= link_to "Login", new_user_session_path, :class => "btn btn-lg btn-primary"  %>
   		  <% end %>
+
+
+        <li><%= link_to "Help", help_path %></li>
       </ul>
     </div>
 

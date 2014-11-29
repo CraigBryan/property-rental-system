@@ -17,10 +17,16 @@ gem 'coffee-rails', '~> 4.0.0'
 # Login authentication
 gem 'devise', '~> 3.4.1'
 
+#authentication
+gem 'cancan'
+
+
 #Pagination helper
 gem 'will_paginate'
 #Tells paginate to use boostrap
 gem 'bootstrap-will_paginate'
+
+
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
