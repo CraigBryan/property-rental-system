@@ -19,7 +19,7 @@ class AdminsController < ApplicationController
     params.require(:user).permit(*user_attributes)
   end
   def user_attributes
-      [ :email,:password, :password_confirmation, :role, :max_rent ]
+      [:email, :first_name, :last_name, :max_rent, :password, :password_confirmation]
   end
   
 end

@@ -1,15 +1,15 @@
 
 <%= form_for @user, url: admins_create_user_by_admin_path do |f| %>
-  	
+
   	<div>
 		<%= f.label :email %><br>
-		<%= f.text_field :email, :required => true %><br>
+		<%= f.text_field :email %><br>
 	</div>
 
 	<div>
 		<%= f.label :role %><br>
 		<% num = 0 %>
-		<%= collection_radio_buttons :role, :roles, Role.all, :id, :name, :required => true do |b| %>
+		<%= collection_radio_buttons :role, :roles, Role.all, :id, :name do |b| %>
 			<%= b.label %>
 			<%= b.label { b.radio_button(id: "radio#{num}") }%>
 			<% num += 1 %>
@@ -19,27 +19,27 @@
 
 	<div>
 		<%= f.label :first_name %><br>
-		<%= f.text_field :first_name, :required => true %><br>
+		<%= f.text_field :first_name %><br>
 	</div>
 
 	<div>
 		<%= f.label :last_name %><br>
-		<%= f.text_field :last_name, :required => true %><br>
+		<%= f.text_field :last_name %><br>
 	</div>
 
 	<div id="user_max_rent" style="display: none">
 		<%= f.label :max_rent %><br>
-		<%= f.text_field :max_rent, :required => true %><br>
+		<%= f.text_field :max_rent %><br>
 	</div>	
 
 	<div>
 		<%= f.label :password %><br>
-		<%= f.text_field :password, :required => true %><br>
+		<%= f.text_field :password %><br>
 	</div>
 
 	<div>
 		<%= f.label :password_confirmation %><br>
-		<%= f.text_field :password_confirmation, :required => true %><br>
+		<%= f.text_field :password_confirmation %><br>
 	</div>
 
 	<div>
