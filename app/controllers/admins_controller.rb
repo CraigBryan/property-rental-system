@@ -1,5 +1,5 @@
 class AdminsController < ApplicationController
-  before_action: deny_access_for_non_admins
+  before_action :deny_access_for_non_admins
   
   def new_user_by_admin
    	@user = User.new
