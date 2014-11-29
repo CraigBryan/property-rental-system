@@ -18,7 +18,7 @@
 
       	<% if user_signed_in? %>
 
-  			  <!--<%= link_to 'Edit profile', edit_user_registration_path, :class => "btn btn-lg btn-primary" %> -->
+  			  <%= link_to 'Profile', edit_user_registration_path, :class => "btn btn-lg btn-primary" %>
   			  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => "btn btn-lg btn-primary"  %>
   		  <% else %>
   			  <!--<%= link_to "Sign up", new_user_registration_path, :class => "btn btn-lg btn-primary" %>--> 
