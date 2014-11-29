@@ -1,7 +1,6 @@
 
 var ready;
 ready = function() {
-	console.log("HELLLOO");
 
 	function disable_rent() {
 		if(document.getElementById('user_max_rent').style.display=='block') 
