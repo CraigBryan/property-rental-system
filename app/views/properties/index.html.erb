@@ -41,10 +41,8 @@
                 
               <% else %>
                 <% @photos[prop.id].each do |photo| %>
-                  <td>
-                    <%= image_tag photo, 
-                                  size: "50x50", 
-                                  alt: "Property photo" %>
+                  <td>  
+                    <%= image_tag photo, class: 'image', alt: 'Property_photo'%>
                   </td>
                 <% end %>
               <% end %>
@@ -59,20 +57,20 @@
 
               <% if current_user.is_role_by_name?("owner")%>
                 <td> <!-- Edit-->
-                  <%= link_to prop, method: :get, class: "btn-primary btn-xs" do %>
+                  <%= link_to prop, method: :get, class: "btn-primary btn-xs button" do %>
                     <span class="glyphicon glyphicon-pencil"></span>
                   <% end %>
                 </td>
 
                 <td> <!-- Delete -->
-                  <%= link_to prop, method: :delete, class: "btn-danger btn-xs " do %>
+                  <%= link_to prop, method: :delete, class: "btn-danger btn-xs button" do %>
                     <span class="glyphicon glyphicon-trash"></span>
                   <% end %>
                 </td>
 
               <% elsif current_user.is_role_by_name?("customer")%>
                 <td> <!-- Add to visiting list -->
-                  <%= link_to new_visit_path(property: prop.id), class: "btn-primary btn-xs" do %>
+                  <%= link_to new_visit_path(property: prop.id), class: "btn-primary btn-xs button" do %>
                     <span class="glyphicon glyphicon-ok"></span>
                   <% end %>
                 </td>

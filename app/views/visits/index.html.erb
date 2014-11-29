@@ -16,17 +16,22 @@
             <th>Property</th>
             <th>Date</th>
             <th>Time</th>
+            <th>Remove from List</th>
           </tr>
         </thead>
 
         <tbody>
 
           <% @visits.each do |visit| %>
-            <tr class="text-center">
+            <tr class="text-left">
               <td><%= link_to visit.property.address, visit.property %></td>
               <td><%= visit.date %></td>
               <td><%= visit.time %></td>
-              <td><%= button_to "Remove from visiting list", visit, method: :delete, data: { confirm: 'Are you sure?' } %></td> <!-- Is the same as a button to bootstrap?-->
+              <td class="text-center">
+                <%= link_to visit, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn-danger btn-xs button' do %>
+                 <span class="glyphicon glyphicon-trash"></span>
+                <%end%>
+              </td>
             </tr>
           <% end %>
         </tbody>
