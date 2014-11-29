@@ -4,25 +4,8 @@
     <h1>Add property</h1>
 
     <%= form_for @property, :html => {:multipart => true} do |prop_form| %>
-
-      <%= prop_form.label :prop_type %>
-      <br>
-      <%= prop_form.label :house_type, "House" %>
-      <%= prop_form.radio_button :prop_type, "house"%>
-      <%= prop_form.label :apt_type, "Apartment" %>
-      <%= prop_form.radio_button :prop_type, "apartment"%>
-      <br>
-
       <%= prop_form.label :address %>
       <%= prop_form.text_field :address, class: 'form-control'%>
-      <br>
-
-      <%= prop_form.label :location %>
-      <%= prop_form.collection_select(:location,
-                                      Location.all,
-                                      :name,
-                                      :name)%>
-      <br>
       <br>
 
       <%= prop_form.label :number_bathrooms %>
@@ -38,7 +21,21 @@
       <br>
 
       <%= prop_form.label :rent_price %>
-      <%= prop_form.number_field :rent_price, :min => 0, class: 'form-control'%>
+      <%= prop_form.number_field :rent_price, :min => 0, class: 'form-control' %>
+      <br>
+
+      <%= prop_form.label :house_type, "House" %>
+      <%= prop_form.radio_button :prop_type, "house"%>
+      <%= prop_form.label :apt_type, "Apartment" %>
+      <%= prop_form.radio_button :prop_type, "apartment" %>
+      <br>
+
+      <%= prop_form.label :location %>
+      <%= prop_form.collection_select(:location,
+                                      Location.all,
+                                      :name,
+                                      :name)%>
+      <br>
 
       <h3>Photos</h3>
       <% 5.times do |i| %>

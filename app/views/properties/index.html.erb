@@ -1,11 +1,15 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <h1> Properties </h1>
+    <h1 class="text-center"> Properties </h1>
 
     <%= will_paginate %>
 
     <% if @properties.size == 0 %>
-      <p>No properties found</p>
+      <% if current_user.is_role_by_name?("owner") %>
+        <p class="text-center">No properties found. To add a Property click <%= link_to "here", new_property_path, class: 'link'%></p>
+      <%else%>
+        <p class="text-center">No properties available</p>
+      <%end%>
     <% else %>
 
       <table class="table">
@@ -38,12 +42,14 @@
             <tr class="text-center">
                 
               <% if @photos.nil? || @photos.size == 0 %>
-                
+
+                <% 5.times do |i| %>
+                  <td><%= image_tag "property.png", alt: "Default property image"%></td>
+                <%end%>
+
               <% else %>
                 <% @photos[prop.id].each do |photo| %>
-                  <td>  
-                    <%= image_tag photo, class: 'image', alt: 'Property_photo'%>
-                  </td>
+                    <td><%= image_tag photo, class: 'image', alt: 'Property_photo'%></td>
                 <% end %>
               <% end %>
 
@@ -63,7 +69,7 @@
                 </td>
 
                 <td> <!-- Delete -->
-                  <%= link_to prop, method: :delete, class: "btn-danger btn-xs button" do %>
+                  <%= link_to prop, method: :delete, class: "btn-danger btn-xs button", data: { confirm: "Are you sure?"} do %>
                     <span class="glyphicon glyphicon-trash"></span>
                   <% end %>
                 </td>
