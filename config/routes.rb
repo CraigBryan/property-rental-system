@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  get 'admins/new_user'
+  get 'admins/new_user_by_admin'
 
-  get 'admins/create_user'
+  get 'admins/create_user_by_admin'
 
   #get 'users/index'
   #resources :users
@@ -16,8 +16,8 @@ Rails.application.routes.draw do
   get 'about' => 'pages#about'
   get "/all_users" => "pages#all_users"
 
-  get "admins/new_user_by_admin" => "admins#new_user", as: :admins_new_user_by_admin
-  post "admins/create_user_by_admin/:id" => "admins#create_user", as: :admins_create_user_by_admin
+  #get "admins/new_user_by_admin" => "admins#new_user", as: :admins_new_user_by_admin
+  #post "admins/create_user_by_admin/:id" => "admins#create_user", as: :admins_create_user_by_admin
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,7 +1,6 @@
 class AdminsController < ApplicationController
   def new_user_by_admin
-  	authorize! :manage, User
-   	@user = Users.new
+   	@user = User.new
   end
 
   def create_user_by_admin

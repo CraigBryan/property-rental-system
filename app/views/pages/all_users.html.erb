@@ -2,7 +2,7 @@
 <p>Find me in app/views/users/index.html.erb</p>
 <% if admin? %>
 	  <!-- <%= link_to " Create New User ", new_user_registration_path %><br />-->
-	  <%= link_to "Create User", admins_new_user_path %>
+	  <%= link_to "Create User", admins_new_user_by_admin_path %>
 <% end %>
 
 <% @users = User.all %>
