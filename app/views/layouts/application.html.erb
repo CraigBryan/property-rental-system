@@ -9,6 +9,9 @@
 
   <body>
     <%= render 'layouts/header' %>
+    <% if user_signed_in? %>
+          <h5 id="logged_as">Logged in as <strong><%= current_user.email %></strong></p></h5>
+    <% end %>
     <% if notice %>
       <p class="alert alert-success"><%= notice %></p>
     <% end %>
