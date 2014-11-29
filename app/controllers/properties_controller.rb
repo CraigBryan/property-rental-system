@@ -162,7 +162,7 @@ class PropertiesController < ApplicationController
       @properties = filter_properties(@properties, params[:search])
       return true
     else
-      flash[:notice] = "Error, no search terms entered"
+      flash[:alert] = "Error, no search terms entered"
       return false
     end
   end
@@ -171,6 +171,8 @@ class PropertiesController < ApplicationController
     search_params = params[:search]
 
     result = false
+
+    return result if search_params.nil?
 
     search_params['locations'].each do |loc|
       result = true unless loc == ""
