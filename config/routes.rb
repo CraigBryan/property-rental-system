@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :properties
+  resources :properties do
+    collection do
+      get :search
+    end
+  end
+
   resources :visits
   
   devise_for :users

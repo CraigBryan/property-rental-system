@@ -1,0 +1,34 @@
+<h1>Search Properties</h1>
+
+<%= form_for @search_params, 
+             :as => :search, 
+             :url => properties_path, 
+             :method => :get do |p| %>
+
+  <%= p.label :locations %>
+  <%= p.collection_check_boxes(:locations, Location.all, :name, :name) %>
+  <br>
+
+  <%= p.label :types %>
+  <%= p.collection_check_boxes(:types, ["house", "apartment"], :chomp, :humanize) %>
+  <br>
+
+  <%= p.label :number_bedrooms %>
+  <%= p.number_field :number_bedrooms %>
+  <br>
+
+  <%= p.label :number_bathrooms %>
+  <%= p.number_field :number_bathrooms %>
+  <br>
+
+  <%= p.label :min_rent %>
+  <%= p.number_field :min_rent %>
+  <br>
+
+  <%= p.label :max_rent %>
+  <%= p.number_field :max_rent %>
+  <br>
+
+  <%= p.submit "Search properties" %>
+
+<% end %>
