@@ -1,14 +1,16 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
 <% if admin? %>
-	  <%= link_to "Create New Profile", admins_new_user_by_admin_path %>
-<% end %>
+	<h1>Users#index</h1>
+	<p>Find me in app/views/users/index.html.erb</p>
 
-<% @users = User.all %>
-<% @users.each do |user| %>
-    <%= user.email %><br/>
-    <%= user.first_name %><br/>
-    <%= user.last_name %><br/>
-    <%= user.max_rent %><br/>
-    <%= user.get_role_by_name(user) %><br/>
+	<%= link_to "Create New Profile", admins_new_user_by_admin_path %>
+
+	<% @users = User.all %>
+	<% @users.each do |user| %>
+	    <%= user.email %><br/>
+	    <%= user.first_name %><br/>
+	    <%= user.last_name %><br/>
+	    <%= user.max_rent %><br/>
+	    <%= user.get_role_by_name(user) %><br/>
+	<% end %>
+
 <% end %>
