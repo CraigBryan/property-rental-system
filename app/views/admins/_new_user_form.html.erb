@@ -10,6 +10,10 @@
 		<%= collection_radio_buttons :role, :roles, Role.all, :id, :name %>	
 	</div>
 
+	<% if defined?(role) %>
+		
+	<% end %>
+
 	<div>
 		<%= f.label :password %><br>
 		<%= f.text_field :password %><br>
