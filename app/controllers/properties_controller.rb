@@ -38,6 +38,15 @@ class PropertiesController < ApplicationController
   def index
     @properties = Property.all
     @properties = Property.paginate(page: params[:page])
+    @photos = {}
+
+    @properties.each do |prop|
+      property_photo = []
+      Photo.where("property_id = ?", prop.id).each do |photo|
+        property_photo.push(photo.file)
+      end
+      @photos[:property_id] = property_photo
+    end
   end
 
   private
