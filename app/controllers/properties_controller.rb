@@ -5,7 +5,6 @@ class PropertiesController < ApplicationController
 
   def new
     @property = Property.new
-    flash[:notice] = "Property successfully added"
   end
 
   def create
