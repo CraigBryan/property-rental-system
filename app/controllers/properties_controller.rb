@@ -30,7 +30,21 @@ class PropertiesController < ApplicationController
   end
 
   def edit
+    @property = Property.find(params[:id])
+    @photos = Photo.where("property_id = ?", @property.id)
+  end
 
+  def update
+    @property = Property.find(params[:id])
+
+    #update direct property values
+    @property.number_bedrooms = property_params[:number_bedrooms]
+    @property.number_bathrooms = property_params[:number_bathrooms]
+    @property.number_other_rooms = property_params[:number_other_rooms]
+    @property.rent_price = property_params[:rent_price]
+
+    #update photo values
+    #TODO
   end
 
   def index
@@ -99,6 +113,10 @@ class PropertiesController < ApplicationController
     end
 
     return file_name.to_s
+  end
+
+  def delete_photo photo_file
+    #TODO
   end
 
   def owner_index
