@@ -44,7 +44,24 @@ class PropertiesController < ApplicationController
     @property.rent_price = property_params[:rent_price]
 
     #update photo values
-    #TODO
+    5.times do |i|
+      photo_params = parse_photo_params(i)
+
+      if photo_params[:deleted]
+        p = Photo.find(:original_id)
+        delete_photo p.file
+        p.destroy
+      end
+
+      if photo_params[:changed]
+        p = Photo.new
+        p.property_id = params[:id]
+        p.file = upload_photo photo_params[:new_file]
+        p.save
+      end
+    end
+
+    @property.save
   end
 
   def index
@@ -118,7 +135,7 @@ class PropertiesController < ApplicationController
 
     FileUtils::mkdir_p file_name
 
-    photo_name = photo_name + "/" +file_io.original_filename
+    photo_name = photo_name + "/" + file_io.original_filename
     file_name = file_name.join(file_io.original_filename)
 
     File.open(file_name, 'wb') do |file|
@@ -129,7 +146,7 @@ class PropertiesController < ApplicationController
   end
 
   def delete_photo photo_file
-    #TODO
+    FileUtils.rm(Rails.root.join('app', 'asset', 'images', photo_file))
   end
 
   def owner_index
@@ -169,5 +186,14 @@ class PropertiesController < ApplicationController
     result = true unless search_params["max_rent"] == ""
 
     result
+  end
+
+  def parse_photo_params index
+    {
+      :original_id => params["photo_#{index}_original_id"].to_i,
+      :deleted => params["photo_#{index}_deleted"] == "true",
+      :changed => params["photo_#{index}_changed"] == "true",
+      :new_file => params["photos#{index}"]
+    }
   end
 end
