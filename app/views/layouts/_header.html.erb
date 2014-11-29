@@ -12,9 +12,9 @@
         <% if admin? %>
           <%= link_to "All Users", all_users_path, :class => "btn btn-lg btn-primary"  %>
         <% end %>
-        <% if admin? %>
-          <%= link_to " Create New User ", new_user_registration_path %><br />
-        <% end %>
+        <!--<% if admin? %>
+          <%= link_to "Create New User ", new_user_registration_path %><br />
+        <% end %>-->
 
       	<% if user_signed_in? %>
   			  <!--<%= link_to 'Edit profile', edit_user_registration_path, :class => "btn btn-lg btn-primary" %> -->
