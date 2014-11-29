@@ -1,0 +1,11 @@
+#logged_as {
+	margin-left: 18px;
+	color:blue;
+}
+
+.link {
+	&:hover {
+		text-decoration: none;
+	}
+}
+
