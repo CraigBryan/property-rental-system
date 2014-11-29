@@ -33,4 +33,9 @@ class User < ActiveRecord::Base
   	is_role?(role)
   end
 
+  def get_role_by_name(user)
+    return user.roles[0].name
+    
+  end
+
 end
