@@ -40,10 +40,8 @@
               <% if @photos.nil? || @photos.size == 0 %>
                 
               <%else%>
-                <% @photos[prop.id].each do |photo_array| %>
-                  <% photo_array.each do |photo| %>
-                    <td><p>photo.file</p></td>
-                  <%end%>
+                <% @photos[prop.id].each do |photo| %>
+                  <td><p>photo.file</p></td>
                 <%end%>
               <%end%>
 
