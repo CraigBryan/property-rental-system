@@ -4,9 +4,9 @@ module FilterHelper
   def filter_properties filterable, filters
 
     #filter by location
-    unless filters[:locations].nil? #TODO needs better check (array of empty strings?)
+    unless filters[:locations].nil? || empty_array?(filters[:locations])
       results = []
-      allowed_locations = filters[:location]
+      allowed_locations = filters[:locations]
 
       filterable.each do |item|
         results.push(item) if allowed_locations.include? item.location
@@ -16,12 +16,12 @@ module FilterHelper
     end
 
     #filter by type
-    unless filters[:type].nil? || filters[:type] == ""
+    unless filters[:types].nil? || empty_array?(filters[:types])
       results = []
-      allowed = filters[:type]
+      allowed_types = filters[:types]
 
       filterable.each do |item|
-        results.push(item) if allowed == item.type 
+        results.push(item) if allowed_types.include? item.prop_type 
       end
 
       filterable = results
@@ -76,5 +76,12 @@ module FilterHelper
     end
 
     return filterable
+  end
+
+  private
+  def empty_array?(arr)
+    result = true
+    arr.each {|item| result = false unless item == ""}
+    return result
   end
 end

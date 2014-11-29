@@ -29,43 +29,40 @@ class PropertiesController < ApplicationController
     end
   end
 
-  #Added destroy action
-  def destroy
-    Property.find(params[:id]).destroy
-    flash[:notice] = "Property successfully destroyed"
-    redirect_to properties_path
+  def edit
+
   end
 
   def index
     if current_user.is_role_by_name?("owner")
-      owner_index
+      success = owner_index
+    else
+      success = customer_index
+    end
+
+    if success
       render 'index'
     else
-      customer_index
-      render 'customer_index'
+      render 'common/error'
     end
+      
   end
 
-  def owner_index
-    @properties = Property.where(":user_id = ?", current_user.id)
-
-    @properties = Property.all
-    @properties = Property.paginate(page: params[:page])
-  end
-
-  def customer_index
-    @properties = Property.where("deleted != ?", true)
-    
-    if has_filters?
-      @properties = filter_properties @properties, params[:search]
+  def search
+    if(current_user.is_role_by_name?("customer") ||
+       current_user.is_role_by_name?("admin"))
+      @search_params = SearchParams.new
+      render 'search'
+    else
+      render 'common/error'
     end
-
-    #TODO, if no filters, give an error
   end
 
   def destroy 
-    prop = Property.find(params[:id]).deleted = true
+    prop = Property.find(params[:id])
+    prop.deleted = true
     prop.save
+    flash[:notice] = "Property successfully deleted"
     redirect_to properties_path
   end
 
@@ -101,8 +98,45 @@ class PropertiesController < ApplicationController
     return file_name.to_s
   end
 
-  #TODO improve this for an array of empty string, maybe
+  def owner_index
+    @properties = Property.where(":user_id = ?", current_user.id)
+
+    @properties = Property.all
+    @properties = Property.paginate(page: params[:page])
+
+    return true
+  end
+
+  def customer_index
+    @properties = Property.where("deleted != ?", true)
+    
+    if has_filters?
+      @properties = filter_properties(@properties, params[:search])
+      return true
+    else
+      flash[:notice] = "Error, no search terms entered"
+      return false
+    end
+  end
+
   def has_filters?
-    params[:search].nil?
+    search_params = params[:search]
+
+    result = false
+
+    search_params['locations'].each do |loc|
+      result = true unless loc == ""
+    end
+
+    search_params['types'].each do |loc|
+      result = true unless loc == ""
+    end
+
+    result = true unless search_params["number_bedrooms"] == ""
+    result = true unless search_params["number_bathrooms"] == ""
+    result = true unless search_params["min_rent"] == ""
+    result = true unless search_params["max_rent"] == ""
+
+    result
   end
 end

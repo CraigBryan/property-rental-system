@@ -2,7 +2,7 @@
   <div class="col-md-6 col-md-offset-3">
     <h1> Properties </h1>
 
-    <%= will_paginate %>
+    
 
     <% if @properties.size == 0 %>
       <p>No properties found</p>
@@ -41,11 +41,7 @@
 
               <% if current_user.is_role_by_name?("owner")%>
 
-                <td> <!-- Edit-->
-                  <%= link_to prop, method: :get, class: "btn-primary btn-xs" do %>
-                    <span class="glyphicon glyphicon-pencil"></span>
-                  <% end %>
-                </td>
+                
 
                 <td> <!-- Delete -->
                   <%= link_to prop, method: :delete, class: "btn-danger btn-xs " do %>
@@ -66,7 +62,7 @@
       </table>
     <% end %>
 
-    <%= will_paginate %>
+    
 
   </div>
 </div>
