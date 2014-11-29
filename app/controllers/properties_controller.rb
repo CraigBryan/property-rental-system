@@ -40,6 +40,9 @@ class PropertiesController < ApplicationController
       success = customer_index
     end
 
+    @properties = Property.all
+    @properties = @properties.paginate(page: params[:page])
+
     if success
       render 'index'
     else
@@ -100,9 +103,6 @@ class PropertiesController < ApplicationController
 
   def owner_index
     @properties = Property.where(":user_id = ?", current_user.id)
-
-    @properties = Property.all
-    @properties = Property.paginate(page: params[:page])
 
     return true
   end
