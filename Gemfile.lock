@@ -35,6 +35,7 @@ GEM
     bootstrap-will_paginate (0.0.10)
       will_paginate
     builder (3.2.2)
+    cancan (1.6.10)
     coderay (1.1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -143,7 +144,11 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap-sass
+<<<<<<< HEAD
   bootstrap-will_paginate
+=======
+  cancan
+>>>>>>> login
   coffee-rails (~> 4.0.0)
   devise (~> 3.4.1)
   jbuilder (~> 2.0)
