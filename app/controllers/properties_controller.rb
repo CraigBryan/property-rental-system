@@ -48,7 +48,7 @@ class PropertiesController < ApplicationController
       photo_params = parse_photo_params(i)
 
       if photo_params[:deleted]
-        p = Photo.find(:original_id)
+        p = Photo.find(photo_params[:original_id])
         delete_photo p.file
         p.destroy
       end
@@ -56,12 +56,14 @@ class PropertiesController < ApplicationController
       if photo_params[:changed]
         p = Photo.new
         p.property_id = params[:id]
-        p.file = upload_photo photo_params[:new_file]
+        p.file = upload_photo photo_params[:new_file], i
         p.save
       end
     end
 
     @property.save
+
+    redirect_to properties_path
   end
 
   def index
@@ -146,7 +148,7 @@ class PropertiesController < ApplicationController
   end
 
   def delete_photo photo_file
-    FileUtils.rm(Rails.root.join('app', 'asset', 'images', photo_file))
+    FileUtils.rm(Rails.root.join('app', 'assets', 'images', photo_file))
   end
 
   def owner_index
