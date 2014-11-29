@@ -1,3 +1,4 @@
+
 <%= form_for @user, url: admins_create_user_by_admin_path do |f| %>
   	
   	<div>
@@ -13,22 +14,22 @@
 			<%= b.label { b.radio_button(id: num)} %>
 			<% num += 1 %>
 		<% end %>	
+
 	</div>
 
 	<div>
 		<%= f.label :first_name %><br>
 		<%= f.text_field :first_name %><br>
 	</div>
-	
+
 	<div>
 		<%= f.label :last_name %><br>
 		<%= f.text_field :last_name %><br>
 	</div>
 
-	<div id="customer_name" style="display: none">
+	<div id="user_max_rent" style="display: none">
 		<%= f.label :max_rent %><br>
 		<%= f.text_field :max_rent %><br>
-	
 	</div>	
 
 	<div>
