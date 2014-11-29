@@ -11,6 +11,11 @@
       <table class="table">
         <thead>
           <tr>
+            <th>Photo 1</th>
+            <th>Photo 2</th>
+            <th>Photo 3</th>
+            <th>Photo 4</th>
+            <th>Photo 5</th>
             <th>#</th>
             <th>Type</th>
             <th>Address</th>
@@ -28,8 +33,20 @@
           </tr>
         </thead>
         <tbody>
+
           <% @properties.each do |prop| %>
             <tr class="text-center">
+                
+              <% if @photos.nil? || @photos.size == 0 %>
+                
+              <%else%>
+                <% @photos[prop.id].each do |photo_array| %>
+                  <% photo_array.each do |photo| %>
+                    <td><p>photo.file</p></td>
+                  <%end%>
+                <%end%>
+              <%end%>
+
               <td><%= prop.id %></td>
               <td><%= prop.prop_type %></td>
               <td><%= prop.address %></td>
@@ -38,9 +55,7 @@
               <td><%= prop.number_bedrooms %></td>
               <td><%= prop.rent_price %></td>
 
-
               <% if current_user.is_role_by_name?("owner")%>
-
                 <td> <!-- Edit-->
                   <%= link_to prop, method: :get, class: "btn-primary btn-xs" do %>
                     <span class="glyphicon glyphicon-pencil"></span>
@@ -55,7 +70,7 @@
 
               <% elsif current_user.is_role_by_name?("customer")%>
                 <td> <!-- Add to visiting list -->
-                  <%= link_to new_visit_path(prop), class: "btn-primary btn-xs" do %>
+                  <%= link_to new_visit_path(property: prop.id), class: "btn-primary btn-xs" do %>
                     <span class="glyphicon glyphicon-ok"></span>
                   <% end %>
                 </td>
