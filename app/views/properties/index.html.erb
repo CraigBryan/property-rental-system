@@ -41,7 +41,11 @@
 
               <% if current_user.is_role_by_name?("owner")%>
 
-                
+                <td> <!-- Edit -->
+                  <%= link_to edit_property_path(prop.id), class: "btn-danger btn-xs " do %>
+                    <span class="glyphicon glyphicon-trash"></span>
+                  <% end %>
+                </td>
 
                 <td> <!-- Delete -->
                   <%= link_to prop, method: :delete, class: "btn-danger btn-xs " do %>
