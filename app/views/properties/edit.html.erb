@@ -39,22 +39,29 @@
 
       <h3>Photos</h3>
       <% 5.times do |i| %>
+
         <% unless @photos[i].nil? %>
-          <%= hidden_field_tag "photo_#{i}_original_id", @photos[i].id %>
-          <%= image_tag @photos[i].file, 
-                        size: "50x50", 
-                        alt: "Photo #{i}", 
-                        id: "photo_#{i}" %>
-          <%= button_tag "Delete photo", id: "delete_photo_#{i}", type: "button" %>
-          <%= label_tag "Replace file:" %>
+
+          <%= content_tag(:div, :id => "deleted_div_#{i}") do %>
+
+            <%= hidden_field_tag "photo_#{i}_original_id", @photos[i].id %>
+            <%= image_tag @photos[i].file, 
+                          size: "50x50", 
+                          alt: "Photo #{i}", 
+                          id: "photo_#{i}" %>
+            <%= button_tag "Delete photo", id: "delete_photo_#{i}", type: "button" %>
+
+          <% end %>
+
+          <%= content_tag :p, "Replace file:", :id => "delete_label_#{i}" %>
+          <%= content_tag :p, "Upload file:", :id => "upload_label_#{i}", :hidden => true %>
+
         <% else %>
-          <%= label_tag "Upload file:" %>
+          <%= content_tag :p, "Upload file:" %>
         <% end %>
         
         <%= file_field_tag "photos#{i}", id: "upload_photo_#{i}" %>
-        <% unless @photos[i].nil? %>
-          
-        <% end %>
+
         <%= hidden_field_tag "photo_#{i}_deleted", false %>
         <%= hidden_field_tag "photo_#{i}_changed", false %>
         <br>
