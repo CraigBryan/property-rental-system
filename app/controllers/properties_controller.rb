@@ -135,13 +135,13 @@ class PropertiesController < ApplicationController
   end
 
   def upload_photo file_io, index
-    photo_name = "uploads/" + @property.id.to_s 
+    photo_name = "uploads/" + @property.id.to_s
     file_name = Rails.root.join('app', 'assets', 'images', photo_name)
 
     FileUtils::mkdir_p file_name
 
-    photo_name = photo_name + "/" + file_io.original_filename
-    file_name = file_name.join(file_io.original_filename)
+    photo_name = photo_name + "/" + index.to_s + "_" + file_io.original_filename
+    file_name = file_name.join(index.to_s + "_" + file_io.original_filename)
 
     File.open(file_name, 'wb') do |file|
       file.write(file_io.read)
