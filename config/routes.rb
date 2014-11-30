@@ -10,8 +10,11 @@ Rails.application.routes.draw do
   
   devise_for :users
 
-  get 'admins/new_user_by_admin'
+  post 'admins/new_user_by_admin'
   post 'admins/create_user_by_admin'
+
+  get 'admins/new_user_by_admin'
+  get 'admins/create_user_by_admin'
 
   get 'visits/list'
   get 'visits/view_list'

@@ -1,0 +1,9 @@
+<% if flash[:unsuccessful_signup] %>
+	<%= flash[:unsuccessful_signup] %>
+	
+<% end %>
+
+<% if flash[:successful_signup] %>
+	<%= flash[:successful_signup] %>
+	<span>&times;</span>
+<% end %>
