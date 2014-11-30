@@ -3,6 +3,8 @@ module FilterHelper
   #This is WET code. Gross.
   def filter_properties filterable, filters
 
+    original = filterable
+
     #filter by location
     unless filters[:locations].nil? || empty_array?(filters[:locations])
       results = []
@@ -75,7 +77,7 @@ module FilterHelper
       filterable = results
     end
 
-    return filterable
+    return Property.where("id IN (#{filterable.map(&:id).join(",")})")
   end
 
   private

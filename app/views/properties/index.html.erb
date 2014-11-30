@@ -32,7 +32,7 @@
 
             <% if current_user.is_role_by_name?("owner")%>
               <th>Edit</th>
-              <th>Destroy</th>
+              <th>Deleted</th>
             <%elsif current_user.is_role_by_name?("customer")%>
               <th>Add to Visiting List</th>
             <%end%>
@@ -78,8 +78,10 @@
 
               <% elsif current_user.is_role_by_name?("customer")%>
                 <td> <!-- Add to visiting list -->
-                  <%= link_to new_visit_path(property: prop.id), class: "btn-primary btn-xs button" do %>
-                    <span class="glyphicon glyphicon-ok"></span>
+                  <% if @affordable_properties.include?(prop) %>
+                    <%= link_to new_visit_path(property: prop.id), class: "btn-primary btn-xs button" do %>
+                      <span class="glyphicon glyphicon-ok"></span>
+                    <% end %>
                   <% end %>
                 </td>
               <%end%>
