@@ -64,10 +64,9 @@
               <td><%= prop.rent_price %></td>
 
               <% if current_user.is_role_by_name?("owner")%>
-              
                 <td> <!-- Edit -->
                   <%= link_to edit_property_path(prop.id), class: "btn-danger btn-xs " do %>
-                    <span class="glyphicon glyphicon-trash"></span>
+                    <span class="glyphicon glyphicon-pencil"></span>
                   <% end %>
                 </td>
 

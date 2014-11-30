@@ -29,7 +29,44 @@ class PropertiesController < ApplicationController
   end
 
   def edit
+    @property = Property.find(params[:id])
+    @photos = Photo.where("property_id = ?", @property.id)
+  end
 
+  def update
+    @property = Property.find(params[:id])
+
+    #update direct property values
+    @property.number_bedrooms = property_params[:number_bedrooms]
+    @property.number_bathrooms = property_params[:number_bathrooms]
+    @property.number_other_rooms = property_params[:number_other_rooms]
+    @property.rent_price = property_params[:rent_price]
+
+    #update photo values
+    5.times do |i|
+      photo_params = parse_photo_params(i)
+
+      if photo_params[:deleted]
+        delete_original photo_params[:original_id]
+      end
+
+      if photo_params[:changed]
+
+        unless photo_params[:original_id].nil? || 
+               photo_params[:original_id] == ""
+          delete_original photo_params[:original_id]
+        end
+
+        p = Photo.new
+        p.property_id = params[:id]
+        p.file = upload_photo photo_params[:new_file], i
+        p.save
+      end
+    end
+
+    @property.save
+
+    redirect_to properties_path
   end
 
   def index
@@ -40,7 +77,17 @@ class PropertiesController < ApplicationController
     end
 
     @properties = Property.all
+
     @properties = @properties.paginate(page: params[:page])
+    @photos = {}
+
+    @properties.each do |prop|
+      property_photo = []
+      Photo.where("property_id = ?", prop.id).each do |photo|
+        property_photo.push(photo.file)
+      end
+      @photos[prop.id] = property_photo
+    end
 
     if success
       render 'index'
@@ -93,7 +140,7 @@ class PropertiesController < ApplicationController
 
     FileUtils::mkdir_p file_name
 
-    photo_name = photo_name + "/" +file_io.original_filename
+    photo_name = photo_name + "/" + file_io.original_filename
     file_name = file_name.join(file_io.original_filename)
 
     File.open(file_name, 'wb') do |file|
@@ -101,6 +148,16 @@ class PropertiesController < ApplicationController
     end
 
     return photo_name.to_s
+  end
+
+  def delete_original id
+    p = Photo.find(id)
+    delete_photo p.file
+    p.destroy
+  end
+
+  def delete_photo photo_file
+    FileUtils.rm(Rails.root.join('app', 'assets', 'images', photo_file))
   end
 
   def owner_index
@@ -116,7 +173,7 @@ class PropertiesController < ApplicationController
       @properties = filter_properties(@properties, params[:search])
       return true
     else
-      flash[:notice] = "Error, no search terms entered"
+      flash[:alert] = "Error, no search terms entered"
       return false
     end
   end
@@ -125,6 +182,8 @@ class PropertiesController < ApplicationController
     search_params = params[:search]
 
     result = false
+
+    return result if search_params.nil?
 
     search_params['locations'].each do |loc|
       result = true unless loc == ""
@@ -140,5 +199,17 @@ class PropertiesController < ApplicationController
     result = true unless search_params["max_rent"] == ""
 
     result
+  end
+
+  def parse_photo_params index
+    original_id = params["photos_#{index}_original_id"] 
+    original_id = original_id.to_i unless original_id.nil?
+    
+    {
+      :original_id => params["photo_#{index}_original_id"],
+      :deleted => params["photo_#{index}_deleted"] == "true",
+      :changed => params["photo_#{index}_changed"] == "true",
+      :new_file => params["photos#{index}"]
+    }
   end
 end
