@@ -5,6 +5,9 @@ ready = function() {
     return function() {
       $("#photo_" + index + "_deleted").val("true");
       $("#photo_" + index + "_changed").val("false");
+      $("#delete_label_" + index).hide();
+      $("#upload_label_" + index).show();  
+      $("#deleted_div_" + index).hide();
     };
   };
 
