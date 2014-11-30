@@ -12,7 +12,7 @@
     <% end %>-->
 
       <% if user_signed_in? %>
-      <%= link_to 'Profile', edit_user_registration_path, class: 'header_link'%> 
+      <%= link_to 'Edit Profile', edit_user_registration_path, class: 'header_link'%> 
         <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'header_link'%>
       <% if customer? %> 
         <%= link_to "Visits", visits_path, class: 'header_link' %>

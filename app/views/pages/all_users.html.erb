@@ -1,17 +1,39 @@
-<% if admin? %>
-	<h1>Users#index</h1>
-	<p>Find me in app/views/users/index.html.erb</p>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+		<% if admin? %>
+			<h1>Users</h1>
+			<%= link_to "Create New Profile", admins_new_user_by_admin_path %>
+			<br>
 
-	<%= link_to "Create New Profile", admins_new_user_by_admin_path %>
-
-	<% @users = User.all %>
-	<% @users.each do |user| %>
-	    <%= user.user_name %><br/>
-	    <%= user.email %><br/>
-	    <%= user.first_name %><br/>
-	    <%= user.last_name %><br/>
-	    <%= user.max_rent %><br/>
-	    <%= user.get_role_by_name(user) %><br/>
-	<% end %>
-
-<% end %>
+			<table class="table">
+				<thead>
+					<tr class="white-text">
+						<th>Username</th>
+						<th>Email</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Max Rent</th>
+						<th>Account Type</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @users = User.all %>
+					<% @users.each do |user| %>
+					<tr class="white-text">
+						<td><%= user.user_name %></td>
+						<td><%= user.email %></td>
+						<td><%= user.first_name %></td>
+						<td><%= user.last_name %></td>
+						<% if user.max_rent.nil? %>
+							<td>N/A</td>
+						<%else%>
+							<td><%= user.max_rent %></td>
+						<%end%>	
+						<td><%= user.get_role_by_name(user) %></td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+		<% end %>
+	</div>
+</div>

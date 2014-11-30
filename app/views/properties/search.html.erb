@@ -1,43 +1,43 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <h1 class="text-center">Search Properties</h1>
+    <h1 class="text-center white-text">Search Properties</h1>
 
     <%= form_for @search_params, 
                  :as => :search, 
                  :url => properties_path, 
                  :method => :get do |p| %>
 
-      <%= p.label :locations %>
+      <%= p.label :locations, class: 'white-text'%>
       <br>
       <%= p.collection_check_boxes(:locations, Location.all, :name, :name,) do |b| %>
-        <%= b.label class: "label-checkbox" do%>
+        <%= b.label class: "label-checkbox white-text" do%>
          <%=b.check_box + b.text%>
         <%end%>
       <%end%>
       <br>
 
-      <%= p.label :types %>
+      <%= p.label :types, class: 'white-text' %>
       <br>
       <%= p.collection_check_boxes(:types, ["house", "apartment"], :chomp, :humanize) do |b| %>
-        <%= b.label class: "label-checkbox" do%>
+        <%= b.label class: "label-checkbox white-text" do%>
          <%=b.check_box + b.text%>
         <%end%>
       <% end %>
       <br>
 
-      <%= p.label :number_bedrooms %>
+      <%= p.label :number_bedrooms, class: 'white-text' %>
       <%= p.number_field :number_bedrooms,class: 'form-control' %>
       <br>
 
-      <%= p.label :number_bathrooms %>
+      <%= p.label :number_bathrooms, class: 'white-text'%>
       <%= p.number_field :number_bathrooms, class: 'form-control'%>
       <br>
 
-      <%= p.label :min_rent %>
+      <%= p.label :min_rent, class: 'white-text'%>
       <%= p.number_field :min_rent, class: 'form-control' %>
       <br>
 
-      <%= p.label :max_rent %>
+      <%= p.label :max_rent, class: 'white-text' %>
       <%= p.number_field :max_rent, class: 'form-control' %>
       <br>
 
