@@ -19,5 +19,4 @@
 /config/database.yml
 
 # ignore uploaded photo files
-/public/uploads/*
-!/public/uploads/README.txt
+/app/assets/images/uploads/*
