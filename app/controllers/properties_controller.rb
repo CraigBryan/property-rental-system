@@ -76,12 +76,11 @@ class PropertiesController < ApplicationController
       success = customer_index
     end
 
-    @properties = Property.all
-
     @properties = @properties.paginate(page: params[:page])
     @photos = {}
 
-    @properties.each do |prop|
+    if success
+      @properties.each do |prop|
       property_photo = []
       Photo.where("property_id = ?", prop.id).each do |photo|
         property_photo.push(photo.file)
@@ -89,7 +88,6 @@ class PropertiesController < ApplicationController
       @photos[prop.id] = property_photo
     end
 
-    if success
       render 'index'
     else
       render 'common/error'
@@ -161,14 +159,15 @@ class PropertiesController < ApplicationController
   end
 
   def owner_index
-    @properties = Property.where(":user_id = ?", current_user.id)
+    @properties = Property.where("user_id = ?", current_user.id)
 
     return true
   end
 
   def customer_index
     @properties = Property.where("deleted != ?", true)
-    
+    #@allowed_properties = Property.where("")
+
     if has_filters?
       @properties = filter_properties(@properties, params[:search])
       return true

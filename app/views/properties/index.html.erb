@@ -78,9 +78,11 @@
 
               <% elsif current_user.is_role_by_name?("customer")%>
                 <td> <!-- Add to visiting list -->
-                  <%= link_to new_visit_path(property: prop.id), class: "btn-primary btn-xs button" do %>
-                    <span class="glyphicon glyphicon-ok"></span>
-                  <% end %>
+                  <%#= if @affordable_properties.include?(prop) %>
+                    <%= link_to new_visit_path(property: prop.id), class: "btn-primary btn-xs button" do %>
+                      <span class="glyphicon glyphicon-ok"></span>
+                    <% end %>
+                  <%# end %>
                 </td>
               <%end%>
             </tr>
