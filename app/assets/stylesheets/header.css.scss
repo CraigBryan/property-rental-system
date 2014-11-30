@@ -4,14 +4,30 @@
   float: left;
   font-size: 30px;
   font-weight: bold;
-  margin-top: 6px;
+  margin-top: 10px;
   color: white;
   &:hover {
     text-decoration: none;
   }
 }
 
-.navbar-header {
-	color: #7298CC;
+a.header_link{
+	height: 65px;
+	line-height:65px;
+	width: 70px;
+	display: inline-block;
+	text-align: center;
 }
+
+.header_link {
+	color: white;
+	font: 16px arial;	
+	&:hover {
+		text-decoration: none;
+		color: white;
+	}
+}
+
+
+
 

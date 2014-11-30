@@ -5,11 +5,11 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
 
-    <h1>Add to visiting list</h1>
+    <h1 class="text-center">Add to visiting list</h1>
 
     <%= form_for @visit do |visit_form| %>
 
-      <%= visit_form.label @property.address %>
+      <address><%= visit_form.label @property.address %></address>
       <%= visit_form.hidden_field :property, :value => @property.id %>
       <br>
 

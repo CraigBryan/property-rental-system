@@ -1,0 +1,33 @@
+#logged_as {
+	margin-left: 18px;
+	color:white;
+}
+
+.link {
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+.logo {
+
+}
+
+.background {
+	background-image: image-url("footer_lodyas.png");
+}
+
+.jumbotron {
+   background: rgba(79, 170, 255, 0.4); 
+}
+
+#welcome {
+	color: white;
+}
+
+.header {
+	color: red; 
+	&:hover {
+		background-color: none;
+	}
+}
