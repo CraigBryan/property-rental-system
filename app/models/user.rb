@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :roles
 
+
   def add_role(role)
   	roles << role 
   end
@@ -31,6 +32,11 @@ class User < ActiveRecord::Base
   def is_role_by_name?(role_name)
   	role = Role.find_by(name: role_name)
   	is_role?(role)
+  end
+
+  def get_role_by_name(user)
+    return user.roles[0].name
+    
   end
 
 end

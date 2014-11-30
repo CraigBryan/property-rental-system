@@ -35,11 +35,11 @@ c.save
 o = Role.new(:name => "owner")
 o.save
 
-au = User.new({:email => "kat@gmail.com", :password => "admin1234", :password_confirmation => "admin1234"} )
+au = User.new({:email => "kat@gmail.com", :first_name => "kat", :last_name => "drobnjakovic", :max_rent => 1000, :password => "admin1234", :password_confirmation => "admin1234"} )
 au.save
-cu = User.new({:email => "craig@gmail.com", :password => "customer1234", :password_confirmation => "customer1234"} )
+cu = User.new({:email => "craig@gmail.com", :first_name => "craig", :last_name => "bryan", :max_rent => 700, :password => "customer1234", :password_confirmation => "customer1234"} )
 cu.save
-ou = User.new({:email => "ryan@gmail.com", :password => "owner1234", :password_confirmation => "owner1234"} )
+ou = User.new({:email => "ryan@gmail.com", :first_name => "ryan", :last_name => "o'conner", :max_rent => 2500, :password => "owner1234", :password_confirmation => "owner1234"} )
 ou.save
 
 au.add_role(a)

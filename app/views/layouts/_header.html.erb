@@ -10,7 +10,7 @@
    <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav pull-right">
         <% if admin? %>
-          <%= link_to "All Users", all_users_path, :class => "btn btn-lg btn-primary"  %>
+          <%= link_to "Users", all_users_path, :class => "btn btn-lg btn-primary"  %>
         <% end %>
         <!--<% if admin? %>
           <%= link_to "Create New User ", new_user_registration_path %><br />
@@ -18,7 +18,7 @@
 
       	<% if user_signed_in? %>
 
-  			  <!--<%= link_to 'Edit profile', edit_user_registration_path, :class => "btn btn-lg btn-primary" %> -->
+  			  <%= link_to 'Profile', edit_user_registration_path, :class => "btn btn-lg btn-primary" %>
   			  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => "btn btn-lg btn-primary"  %>
   		  <% else %>
   			  <!--<%= link_to "Sign up", new_user_registration_path, :class => "btn btn-lg btn-primary" %>--> 

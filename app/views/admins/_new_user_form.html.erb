@@ -1,23 +1,45 @@
+
 <%= form_for @user, url: admins_create_user_by_admin_path do |f| %>
-  	
+
   	<div>
-		<%= f.label :email %><br>
-		<%= f.text_field :email %><br>
+		<%= f.label :email %>*<br>
+		<%= f.text_field :email, :required => true %><br>
 	</div>
 
 	<div>
-		<%= f.label :role %><br>
-		<%= collection_radio_buttons :role, :roles, Role.all, :id, :name %>	
+		<%= f.label :role %>*<br>
+		<% num = 0 %>
+		<%= collection_radio_buttons :role, :roles, Role.all, :id, :name, :required => true do |b| %>
+			<%= b.label %>
+			<%= b.label { b.radio_button(id: "radio#{num}") }%>
+			<% num += 1 %>
+		<% end %>	
+
 	</div>
 
 	<div>
-		<%= f.label :password %><br>
-		<%= f.text_field :password %><br>
+		<%= f.label :first_name %>*<br>
+		<%= f.text_field :first_name, :required => true %><br>
 	</div>
 
 	<div>
-		<%= f.label :password_confirmation %><br>
-		<%= f.text_field :password_confirmation %><br>
+		<%= f.label :last_name %>*<br>
+		<%= f.text_field :last_name, :required => true %><br>
+	</div>
+
+	<div id="user_max_rent" style="display: none">
+		<%= f.label :max_rent %>*<br>
+		<%= f.text_field :max_rent, :required => true %><br>
+	</div>	
+
+	<div>
+		<%= f.label :password %>*<br>
+		<%= f.text_field :password, :required => true %><br>
+	</div>
+
+	<div>
+		<%= f.label :password_confirmation %>*<br>
+		<%= f.text_field :password_confirmation, :required => true %><br>
 	</div>
 
 	<div>
@@ -25,3 +47,5 @@
 	</div>
 
 <% end %>
+
+<%= javascript_include_tag "specific/admins" %>

@@ -1,4 +1,6 @@
 class AdminsController < ApplicationController
+  before_action :deny_access_for_non_admins
+  
   def new_user_by_admin
    	@user = User.new
   end
@@ -19,7 +21,7 @@ class AdminsController < ApplicationController
     params.require(:user).permit(*user_attributes)
   end
   def user_attributes
-      [ :email,:password, :password_confirmation, :role ]
+      [:email, :first_name, :last_name, :max_rent, :password, :password_confirmation]
   end
   
 end
