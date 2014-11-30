@@ -5,7 +5,7 @@
 
     <%= form_for @property, :html => {:multipart => true} do |prop_form| %>
 
-      <%= prop_form.label :prop_type %>
+      <%= prop_form.label "Type of property" %>
       <br>
       <%= prop_form.label :house_type, "House" %>
       <%= prop_form.radio_button :prop_type, "house"%>

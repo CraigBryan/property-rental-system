@@ -12,6 +12,7 @@ class VisitsController < ApplicationController
     @visit.user = current_user
     @visit.property = Property.find params[:visit][:property]
 
+    #look for visit that has the same property id, date and time
     if @visit.save
       redirect_to visits_path
     else

@@ -20,3 +20,4 @@
 
 # ignore uploaded photo files
 /app/assets/images/uploads/*
+/public/uploads/*
