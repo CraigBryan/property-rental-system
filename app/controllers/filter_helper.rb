@@ -78,7 +78,6 @@ module FilterHelper
     end
 
     return Property.where("id IN (#{filterable.map(&:id).join(",")})")
-
   end
 
   private

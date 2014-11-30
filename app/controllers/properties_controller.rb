@@ -166,7 +166,8 @@ class PropertiesController < ApplicationController
 
   def customer_index
     @properties = Property.where("deleted != ?", true)
-    #@allowed_properties = Property.where("")
+    @affordable_properties = @properties.where("rent_price <= ?",
+                                            current_user.max_rent)
 
     if has_filters?
       @properties = filter_properties(@properties, params[:search])
