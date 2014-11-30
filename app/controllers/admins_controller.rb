@@ -16,17 +16,17 @@ class AdminsController < ApplicationController
     @user.valid?
 
 
-    email_exist = User.exists? email: params[:user][:email]
+    user_name_exist = User.exists? user_name: params[:user][:user_name]
     password_match = params[:user][:password] != params[:user][:password_confirmation]
 
     prefix = ['Oh Snap!', 'Holy Moly!', 'Jeepers!', 'Gosh Darnit!'].sample
 
     case 
-    when email_exist && password_match
-      flash[:unsuccessful_signup] = prefix << " That email is already taken and you're passwords don't match"
+    when user_name_exist && password_match
+      flash[:unsuccessful_signup] = prefix << " That username is already taken and you're passwords don't match"
       render :new_user_by_admin
-    when email_exist
-      flash[:unsuccessful_signup] = prefix << " That email is already taken."
+    when user_name_exist
+      flash[:unsuccessful_signup] = prefix << " That username is already taken."
       render :new_user_by_admin
     when password_match
       flash[:unsuccessful_signup] = prefix << " You're passwords don't match."
@@ -46,7 +46,7 @@ class AdminsController < ApplicationController
     params.require(:user).permit(*user_attributes)
   end
   def user_attributes
-      [:email, :first_name, :last_name, :max_rent, :password, :password_confirmation]
+      [:user_name, :email, :first_name, :last_name, :max_rent, :password, :password_confirmation]
   end
   
 end
