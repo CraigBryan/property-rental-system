@@ -48,12 +48,16 @@ class PropertiesController < ApplicationController
       photo_params = parse_photo_params(i)
 
       if photo_params[:deleted]
-        p = Photo.find(photo_params[:original_id])
-        delete_photo p.file
-        p.destroy
+        delete_original photo_params[:original_id]
       end
 
       if photo_params[:changed]
+
+        unless photo_params[:original_id].nil? || 
+               photo_params[:original_id] == ""
+          delete_original photo_params[:original_id]
+        end
+
         p = Photo.new
         p.property_id = params[:id]
         p.file = upload_photo photo_params[:new_file], i
@@ -147,6 +151,12 @@ class PropertiesController < ApplicationController
     return photo_name.to_s
   end
 
+  def delete_original id
+    p = Photo.find(id)
+    delete_photo p.file
+    p.destroy
+  end
+
   def delete_photo photo_file
     FileUtils.rm(Rails.root.join('app', 'assets', 'images', photo_file))
   end
@@ -193,8 +203,11 @@ class PropertiesController < ApplicationController
   end
 
   def parse_photo_params index
+    original_id = params["photos_#{index}_original_id"] 
+    original_id = original_id.to_i unless original_id.nil?
+    
     {
-      :original_id => params["photo_#{index}_original_id"].to_i,
+      :original_id => params["photo_#{index}_original_id"],
       :deleted => params["photo_#{index}_deleted"] == "true",
       :changed => params["photo_#{index}_changed"] == "true",
       :new_file => params["photos#{index}"]
