@@ -2,7 +2,11 @@ class AdminsController < ApplicationController
   before_action :deny_access_for_non_admins
   
   def new_user_by_admin
-   	@user = User.new
+    if params[:user].nil?
+   	  @user = User.new 
+    else
+      @user = User.new user
+    end 
   end
 
   def create_user_by_admin
