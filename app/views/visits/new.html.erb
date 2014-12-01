@@ -1,27 +1,18 @@
-<!-- This is the view after a customer viewing a property hits
-     "add to visiting list". They should need to just select a
-     date and time (the property and customer ids should be
-     available from context -->
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
+<h1 class="text-center">Add to visiting list</h1>
 
-    <h1 class="text-center">Add to visiting list</h1>
+  <%= form_for @visit do |visit_form| %>
 
-    <%= form_for @visit do |visit_form| %>
+  <address><%= visit_form.label @property.address %></address>
+  <%= visit_form.hidden_field :property, :value => @property.id %>
+  <br>
 
-      <address><%= visit_form.label @property.address %></address>
-      <%= visit_form.hidden_field :property, :value => @property.id %>
-      <br>
+  <%= visit_form.label :date %>
+  <%= visit_form.date_field :date, class: 'form-control' %>
+  <br>
 
-      <%= visit_form.label :date %>
-      <%= visit_form.date_field :date, class: 'form-control' %>
-      <br>
+  <%= visit_form.label :time %>
+  <%= visit_form.time_field :time, class: 'form-control' %>
+  <br>
 
-      <%= visit_form.label :time %>
-      <%= visit_form.time_field :time, class: 'form-control' %>
-      <br>
-
-      <%= visit_form.submit "Add to Visiting List", class: 'btn btn-primary' %>
-    <% end %>
-  </div>
-</div>
+  <%= visit_form.submit "Add to Visiting List", class: 'btn btn-primary' %>
+<% end %>

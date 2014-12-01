@@ -1,76 +1,64 @@
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
+<h1 id="welcome" class="center">Update property</h1>
+<%= form_for @property, :html => {:multipart => true} do |prop_form| %>
 
-    <h1>Update property</h1>
+  <%= prop_form.label "Type of property", class: 'white-text'%>
+  <br>
+  <%= prop_form.label :house_type, "House", class: 'white-text'%>
+  <%= prop_form.radio_button :prop_type, "house", disabled: true %>
+  <%= prop_form.label :apt_type, "Apartment", class: 'white-text' %>
+  <%= prop_form.radio_button :prop_type, "apartment", disabled: true %>
+  <br>
 
-    <%= form_for @property, :html => {:multipart => true} do |prop_form| %>
+  <%= prop_form.label :address, class: 'white-text'  %>
+  <%= prop_form.text_field :address, disabled: true, class: 'form-control'%>
+  <br>
 
-      <%= prop_form.label "Type of property" %>
-      <br>
-      <%= prop_form.label :house_type, "House" %>
-      <%= prop_form.radio_button :prop_type, "house", disabled: true %>
-      <%= prop_form.label :apt_type, "Apartment" %>
-      <%= prop_form.radio_button :prop_type, "apartment", disabled: true %>
-      <br>
+  <%= prop_form.label :location, class: 'white-text'  %>
+  <%= prop_form.text_field :location, disabled: true, class: 'form-control'%>
+  <br>
+  <br>
 
-      <%= prop_form.label :address %>
-      <%= prop_form.text_field :address, disabled: true, class: 'form-control'%>
-      <br>
+  <%= prop_form.label :number_bathrooms, class: 'white-text'  %>
+  <%= prop_form.number_field :number_bathrooms, :min => 0, class: 'form-control' %>
+  <br>
 
-      <%= prop_form.label :location %>
-      <%= prop_form.text_field :location, disabled: true, class: 'form-control'%>
-      <br>
-      <br>
+  <%= prop_form.label :number_bedrooms, class: 'white-text'  %>
+  <%= prop_form.number_field :number_bedrooms, :min => 0, class: 'form-control' %>
+  <br>
 
-      <%= prop_form.label :number_bathrooms %>
-      <%= prop_form.number_field :number_bathrooms, :min => 0, class: 'form-control' %>
-      <br>
+  <%= prop_form.label :number_other_rooms, class: 'white-text'  %>
+  <%= prop_form.number_field :number_other_rooms, :min => 0, class: 'form-control' %>
+  <br>
 
-      <%= prop_form.label :number_bedrooms %>
-      <%= prop_form.number_field :number_bedrooms, :min => 0, class: 'form-control' %>
-      <br>
+  <%= prop_form.label :rent_price, class: 'white-text'  %>
+  <%= prop_form.number_field :rent_price, :min => 0, class: 'form-control'%>
 
-      <%= prop_form.label :number_other_rooms %>
-      <%= prop_form.number_field :number_other_rooms, :min => 0, class: 'form-control' %>
-      <br>
+  <h3 class="white-text center">Photos</h3>
+  <% 5.times do |i| %>
+    <% unless @photos[i].nil? %>
 
-      <%= prop_form.label :rent_price %>
-      <%= prop_form.number_field :rent_price, :min => 0, class: 'form-control'%>
+      <%= content_tag(:div, :id => "deleted_div_#{i}") do %>
 
-      <h3>Photos</h3>
-      <% 5.times do |i| %>
-
-        <% unless @photos[i].nil? %>
-
-          <%= content_tag(:div, :id => "deleted_div_#{i}") do %>
-
-            <%= hidden_field_tag "photo_#{i}_original_id", @photos[i].id %>
-            <%= image_tag @photos[i].file, 
-                          size: "50x50", 
-                          alt: "Photo #{i}", 
-                          id: "photo_#{i}" %>
-            <%= button_tag "Delete photo", id: "delete_photo_#{i}", type: "button" %>
-
-          <% end %>
-
-          <%= content_tag :p, "Replace file:", :id => "delete_label_#{i}" %>
-          <%= content_tag :p, "Upload file:", :id => "upload_label_#{i}", :hidden => true %>
-
-        <% else %>
-          <%= content_tag :p, "Upload file:" %>
-        <% end %>
-        
-        <%= file_field_tag "photos#{i}", id: "upload_photo_#{i}" %>
-
-        <%= hidden_field_tag "photo_#{i}_deleted", false %>
-        <%= hidden_field_tag "photo_#{i}_changed", false %>
-        <br>
-      <% end %>
-
-      <%= prop_form.submit "Update Property", class: 'btn btn-primary' %>
+        <%= hidden_field_tag "photo_#{i}_original_id", @photos[i].id %>
+        <%= image_tag @photos[i].file, size: "50x50", alt: "Photo #{i}", id: "photo_#{i}" %>
+        <%= button_tag "Delete photo", id: "delete_photo_#{i}", type: "button" %>
     <% end %>
 
-  </div>
-</div>
+    <%= content_tag :p, "Replace file:", :id => "delete_label_#{i}" %>
+    <%= content_tag :p, "Upload file:", :id => "upload_label_#{i}", :hidden => true %>
+
+    <% else %>
+      <%= content_tag :p, "Upload file:" %>
+    <% end %>
+
+    <%= file_field_tag "photos#{i}", id: "upload_photo_#{i}" %>
+
+    <%= hidden_field_tag "photo_#{i}_deleted", false %>
+    <%= hidden_field_tag "photo_#{i}_changed", false %>
+    <br>
+  <% end %>
+
+  <%= prop_form.submit "Update Property", class: 'btn btn-primary' %>
+<% end %>
 
 <%= javascript_include_tag "specific/property_edit" %>

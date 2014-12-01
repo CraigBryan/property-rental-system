@@ -1,48 +1,41 @@
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <h1 class='white-text'>Edit Profile</h1>
+<h1 id="welcome" class="center">Edit Profile</h2>
 
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-      <%= devise_error_messages! %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= devise_error_messages! %>
 
-      <div class="field">
-        <%= f.label :user_name, class: 'white-text'%><br />
-        <%= f.email_field :user_name, autofocus: true, class: 'form-control' %>
-      </div>
-
-      <div class="field">
-        <%= f.label :email,class: 'white-text'%><br />
-        <%= f.email_field :email, autofocus: true, class: 'form-control' %>
-      </div>
-
-      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-      <% end %>
-
-      <div class="field">
-        <%= f.label :password, class: 'white-text' %> <i class='red-text'>(leave blank if you don't want to change it)</i><br />
-        <%= f.password_field :password, autocomplete: "off", class: 'form-control'%>
-      </div>
-
-      <div class="field">
-        <%= f.label :password_confirmation, class: 'white-text'%><br />
-        <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
-      </div>
-
-      <div class="field">
-        <%= f.label :current_password, class: 'white-text' %> <i class='red-text'>(we need your current password to confirm your changes)</i><br /> 
-        <%= f.password_field :current_password, autocomplete: "off", class: 'form-control' %>
-      </div>
-
-      <div class="actions">
-        <%= f.submit "Update", class: 'btn btn-primary'%>
-      </div>
-    <% end %>
-
-    <h3 class="white-text">Cancel my account</h3>
-
-    <!-- Might need to add styling to this -->
-    <p class="white-text">Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-primary' %></p>
-
+  <div class="field">
+    <%= f.label :user_name, class: 'white-text input_labels'%><br />
+    <%= f.email_field :user_name, autofocus: true, class: 'form-control' %>
   </div>
-</div>
+
+  <div class="field">
+    <%= f.label :email,class: 'white-text input_labels'%><br />
+    <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+  </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :password, class: 'white-text input_labels' %> <small>(leave blank if you don't want to change it)</small><br />
+   <%= f.password_field :password, autocomplete: "off", class: 'form-control'%>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation, class: 'white-text input_labels'%><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :current_password, class: 'white-text input_labels' %> <small>(we need your current password to confirm your changes)</small><br />
+    <%= f.password_field :current_password, autocomplete: "off", class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Update", class: 'btn btn-primary'%>
+    <h3 class="white-text">or</h3>
+    <%= button_to "Delete Account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-primary inline' %>
+  </div>
+<% end %>
+
