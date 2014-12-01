@@ -2,7 +2,7 @@ require 'fileutils'
 
 class PropertiesController < ApplicationController
   include FilterHelper
-  before_action :ensure_authorized, :only => [:new, :create, :destroy]
+  before_action :ensure_authorized, :only => [:new, :create, :edit, :update, :destroy]
 
   def new
     @property = Property.new
@@ -165,8 +165,9 @@ class PropertiesController < ApplicationController
 
   def customer_index
     @properties = Property.where("deleted != ?", true)
-    @affordable_properties = @properties.where("rent_price <= ?",
-                                            current_user.max_rent)
+    @unaffordable_properties = @properties.where("rent_price > ?",
+                                                 current_user.max_rent)
+    @visited_properties = @properties.joins(:visits).where("visits.user_id = ?", current_user.id)
 
     if has_filters?
       @properties = filter_properties(@properties, params[:search])

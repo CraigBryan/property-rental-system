@@ -83,10 +83,14 @@
             <% elsif current_user.is_role_by_name?("customer")%>
 
               <td> <!-- Add to visiting list -->
-                <% if @affordable_properties.include?(prop) %>
+                <% if @unaffordable_properties.include?(prop) %> 
+                  <small>Too expensive!</small>
+                <% elsif @visited_properties.include?(prop) %>
+                  <small>Visited!</small>
+                <% else %>
                   <%= link_to new_visit_path(property: prop.id), class: "btn-primary btn-xs button" do %>
                     <span class="glyphicon glyphicon-ok"></span>
-                  <% end %>
+                  <% end %> 
                 <% end %>
               </td>
 
