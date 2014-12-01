@@ -1,16 +1,20 @@
+// Login
+.input_labels {
+	margin-top: 20px;
+}
+
 #logged_as {
 	margin-left: 18px;
 	color:white;
 }
 
+//System wide
 .link {
+	color: black;
 	&:hover {
 		text-decoration: none;
+		color: white;
 	}
-}
-
-.logo {
-
 }
 
 .background {
@@ -18,30 +22,41 @@
 }
 
 .jumbotron {
-   background: rgba(79, 170, 255, 0.4); 
+   background: rgba(79, 170, 255, 0.4);
 }
 
+.white-text {
+	color: white;
+}
+
+.red-text {
+	color: #BA0909;
+}
+
+//Welcome page
 #welcome {
 	color: white;
 }
 
-.header {
-	color: red; 
-	&:hover {
-		background-color: none;
-	}
+textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {
+    border-color: rgba(229, 103, 23, 0.8);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.6) inset, 0 0 8px rgba(0, 0, 0, 0.5);
+    outline: 0 none;
 }
 
-.white-text {
-	color: white;	
-}
-
-.red-text { 
-	color: #BA0909; 
-}
-
-
-//Table border color 
+//Table border color
 .divider-color {
 	border-color:black;
 }
+
+#number_bedrooms {
+	margin-top: 10px;
+}
+
+//Might not be needed
+// .header {
+// 	color: red;
+// 	&:hover {
+// 		background-color: none;
+// 	}
+// }
