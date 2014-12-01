@@ -159,8 +159,7 @@ class PropertiesController < ApplicationController
   end
 
   def owner_index
-    @properties = Property.where("user_id = ?", current_user.id)
-
+    @properties = Property.where("user_id = ?", current_user.id).order(:deleted)
     return true
   end
 

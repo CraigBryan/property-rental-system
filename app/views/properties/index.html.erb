@@ -1,55 +1,60 @@
-<h2 class="text-center white-text"> Properties </h1>
+<h1 id="welcome" class="text-center"> Properties </h1>
+<% if @properties.size != 0 %>
+  <%= will_paginate %>
+<% end %>
 
-  <% if @properties.size != 0 %>
-    <%= will_paginate %>
-  <% end %>
+<% if @properties.size == 0 %>
+  <% if current_user.is_role_by_name?("owner") %>
+    <p class="text-center white-text">No properties found. To add a Property click <%= link_to "here", new_property_path, class: 'link'%></p>
+  <%else%>
+    <p class="text-center white-text">No properties available</p>
+  <%end%>
+<% else %>
 
-  <% if @properties.size == 0 %>
-    <% if current_user.is_role_by_name?("owner") %>
-      <p class="text-center white-text">No properties found. To add a Property click <%= link_to "here", new_property_path, class: 'link'%>.</p>
-    <%else%>
-      <p class="text-center white-text">No properties available</p>
-    <%end%>
-  <% else %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Photos</th>
+        <th>#</th>
+        <th>Type</th>
+        <th>Address</th>
+        <th>Location</th>
+        <th>Number of Bathrooms</th>
+        <th>Number of Bedrooms</th>
+        <th>Rent Price</th>
 
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Photo 1</th>
-          <th>Photo 2</th>
-          <th>Photo 3</th>
-          <th>Photo 4</th>
-          <th>Photo 5</th>
-          <th>#</th>
-          <th>Type</th>
-          <th>Address</th>
-          <th>Location</th>
-          <th>Number of Bathrooms</th>
-          <th>Number of Bedrooms</th>
-          <th>Rent Price</th>
+        <% if current_user.is_role_by_name?("owner")%>
+          <th>Edit</th>
+          <th>Delete</th>
+        <%elsif current_user.is_role_by_name?("customer")%>
+          <th>Add to Visiting List</th>
+        <%end%>
 
-          <% if current_user.is_role_by_name?("owner")%>
-            <th>Edit</th>
-            <th>Deleted</th>
-          <%elsif current_user.is_role_by_name?("customer")%>
-            <th>Add to Visiting List</th>
-          <%end%>
-        </tr>
-      </thead>
-      <tbody>
-        <% @properties.each do |prop| %>
-          <tr class="text-center white-text">
+      </tr>
+    </thead>
 
-          <% if @photos.nil? || @photos.size == 0 %>
+    <tbody>
+      <% @properties.each do |prop| %>
+        <% unless prop.deleted %> <!-- Non-deleted properties -->
 
-            <% 5.times do |i| %>
-              <td><%= image_tag "property.png", alt: "Default property image"%></td>
-            <%end%>
+          <tr class="white-text">
+
+            <% if @photos.nil? || @photos.size == 0 %>
+
+              <td>
+                <div></div> <!-- To fill the space -->
+              </td>
 
             <% else %>
-              <% @photos[prop.id].each do |photo| %>
-                <td><%= image_tag photo, class: 'image', alt: 'Property_photo'%></td>
-              <% end %>
+
+              <td>
+                <div class="image-container">
+                  <% @photos[prop.id].each do |photo| %>
+                    <%= image_tag photo, class: 'image', alt: 'Property_photo'%>
+                  <% end %>
+                </div>
+              </td>
+
             <% end %>
 
             <td><%= prop.id %></td>
@@ -61,32 +66,84 @@
             <td><%= prop.rent_price %></td>
 
             <% if current_user.is_role_by_name?("owner")%>
-              <td> <!-- Edit -->
-              <%= link_to edit_property_path(prop.id), class: "btn-danger btn-xs " do %>
-                <span class="glyphicon glyphicon-pencil"></span>
-              <% end %>
-            </td>
+              <td class="center"> <!-- Edit -->
+                <%= link_to edit_property_path(prop.id), class: "btn-info btn-xs button" do %>
+                  <span class="glyphicon glyphicon-pencil"></span>
+                <% end %>
+              </td>
 
-            <td> <!-- Delete -->
-              <%= link_to prop, method: :delete, class: "btn-danger btn-xs button", data: { confirm: "Are you sure?"} do %>
-                <span class="glyphicon glyphicon-trash"></span>
-              <% end %>
-            </td>
+              <td class="center"> <!-- Delete -->
+                <%= link_to prop, method: :delete, class: "btn-danger btn-xs button", data: { confirm: "Are you sure?"} do %>
+                  <span class="glyphicon glyphicon-trash"></span>
+                <% end %>
+              </td>
 
-          <% elsif current_user.is_role_by_name?("customer")%>
-            <td> <!-- Add to visiting list -->
-            <% if @affordable_properties.include?(prop) %>
-              <%= link_to new_visit_path(property: prop.id), class: "btn-primary btn-xs button" do %>
-                <span class="glyphicon glyphicon-ok"></span>
-              <% end %>
-            <% end %>
-          </td>
-        <%end%>
+            <% elsif current_user.is_role_by_name?("customer")%>
+
+              <td> <!-- Add to visiting list -->
+                <% if @affordable_properties.include?(prop) %>
+                  <%= link_to new_visit_path(property: prop.id), class: "btn-primary btn-xs button" do %>
+                    <span class="glyphicon glyphicon-ok"></span>
+                  <% end %>
+                <% end %>
+              </td>
+
+          <%end%>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% end %>
+      <% else %> <!-- deleted properties -->
+
+        </tbody>
+        </table>
+
+        <h2 class="white-text"> Deleted properties </h2>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Photos</th>
+                <th>#</th>
+                <th>Type</th>
+                <th>Address</th>
+                <th>Location</th>
+                <th>Number of Bathrooms</th>
+                <th>Number of Bedrooms</th>
+                <th>Rent Price</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr class="white-text">
+                <% if @photos.nil? || @photos.size == 0 %>
+
+                  <td>
+                    <div></div> <!-- To fill the space -->
+                  </td>
+
+                <% else %>
+
+                  <td>
+                    <% @photos[prop.id].each do |photo| %>
+                      <%= image_tag photo, class: 'image', alt: 'Property_photo'%>
+                    <% end %>
+                  </td>
+
+                <% end %>
+
+                  <td><%= prop.id %></td>
+                  <td><%= prop.prop_type %></td>
+                  <td><%= prop.address %></td>
+                  <td><%= prop.location %></td>
+                  <td><%= prop.number_bathrooms %></td>
+                  <td><%= prop.number_bedrooms %></td>
+                  <td><%= prop.rent_price %></td>
+                </tr>
+              </tbody>
+
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
 
 <% if @properties.size != 0 %>
   <%= will_paginate %>

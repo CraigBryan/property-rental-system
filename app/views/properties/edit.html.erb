@@ -33,7 +33,7 @@
   <%= prop_form.label :rent_price, class: 'white-text'  %>
   <%= prop_form.number_field :rent_price, :min => 0, class: 'form-control'%>
 
-  <h3 class="white-text center">Photos</h3>
+  <h2 class="white-text">Photos</h2>
   <% 5.times do |i| %>
     <% unless @photos[i].nil? %>
 
@@ -44,11 +44,11 @@
         <%= button_tag "Delete photo", id: "delete_photo_#{i}", type: "button" %>
     <% end %>
 
-    <%= content_tag :p, "Replace file:", :id => "delete_label_#{i}" %>
+    <%= content_tag :p, "Replace file:", :id => "delete_label_#{i}", class: 'white-text'%>
     <%= content_tag :p, "Upload file:", :id => "upload_label_#{i}", :hidden => true %>
 
     <% else %>
-      <%= content_tag :p, "Upload file:" %>
+      <%= content_tag :p, "Upload file:", class: 'white-text'%>
     <% end %>
 
     <%= file_field_tag "photos#{i}", id: "upload_photo_#{i}" %>
