@@ -77,7 +77,11 @@ module FilterHelper
       filterable = results
     end
 
-    return Property.where("id IN (#{filterable.map(&:id).join(",")})")
+    if filterable.size != 0
+      return Property.where("id IN (#{filterable.map(&:id).join(",")})")
+    else
+      return Property.where("1=2")
+    end
   end
 
   private
