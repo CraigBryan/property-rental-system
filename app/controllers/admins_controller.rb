@@ -19,6 +19,7 @@ class AdminsController < ApplicationController
 
     user_name_exist = User.exists? user_name: params[:user][:user_name]
     password_match = params[:user][:password] != params[:user][:password_confirmation]
+    user_name_invalid = params[:user_name].to_s =~ (/[^a-zA-Z0-9]/)
 
     prefix = ['Oh Snap!', 'Holy Moly!', 'Jeepers!', 'Gosh Darnit!'].sample
 
@@ -31,6 +32,9 @@ class AdminsController < ApplicationController
       render :new_user_by_admin
     when password_match
       flash[:unsuccessful_signup] = prefix << " You're passwords don't match."
+      render :new_user_by_admin
+    when user_name_invalid
+      flash[:invalid_username] = prefix << " Usernames can only contain letters and numbers." 
       render :new_user_by_admin
     when @user.save
       flash[:successful_signup] = prefix << " Account created!"
