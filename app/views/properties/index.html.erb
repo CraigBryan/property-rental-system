@@ -17,11 +17,7 @@
       <table class="table">
         <thead>
           <tr>
-            <th>Photo 1</th>
-            <th>Photo 2</th>
-            <th>Photo 3</th>
-            <th>Photo 4</th>
-            <th>Photo 5</th>
+            <th>Photos</th>
             <th>#</th>
             <th>Type</th>
             <th>Address</th>
@@ -32,7 +28,7 @@
 
             <% if current_user.is_role_by_name?("owner")%>
               <th>Edit</th>
-              <th>Deleted</th>
+              <th>Delete</th>
             <%elsif current_user.is_role_by_name?("customer")%>
               <th>Add to Visiting List</th>
             <%end%>
@@ -41,51 +37,103 @@
         <tbody>
 
           <% @properties.each do |prop| %>
-            <tr class="text-center">
-                
-              <% if @photos.nil? || @photos.size == 0 %>
+            <% unless prop.deleted %> <!-- Non-deleted properties -->
+              <tr class="text-center">
+                  
+                <% if @photos.nil? || @photos.size == 0 %>
 
-                <% 5.times do |i| %>
-                  <td><%= image_tag "property.png", alt: "Default property image"%></td>
-                <%end%>
+                  <td>
+                    <div></div> <!-- To fill the space -->
+                  </td>
 
-              <% else %>
-                <% @photos[prop.id].each do |photo| %>
-                    <td><%= image_tag photo, class: 'image', alt: 'Property_photo'%></td>
+                <% else %>
+                    <td>
+                      <div class="image-container">
+                        <% @photos[prop.id].each do |photo| %>
+                          <%= image_tag photo, class: 'image', alt: 'Property_photo'%>
+                        <% end %>
+                      </div>
+                    </td>
+
                 <% end %>
-              <% end %>
 
-              <td><%= prop.id %></td>
-              <td><%= prop.prop_type %></td>
-              <td><%= prop.address %></td>
-              <td><%= prop.location %></td>
-              <td><%= prop.number_bathrooms %></td>
-              <td><%= prop.number_bedrooms %></td>
-              <td><%= prop.rent_price %></td>
+                <td><%= prop.id %></td>
+                <td><%= prop.prop_type %></td>
+                <td><%= prop.address %></td>
+                <td><%= prop.location %></td>
+                <td><%= prop.number_bathrooms %></td>
+                <td><%= prop.number_bedrooms %></td>
+                <td><%= prop.rent_price %></td>
 
-              <% if current_user.is_role_by_name?("owner")%>
-                <td> <!-- Edit -->
-                  <%= link_to edit_property_path(prop.id), class: "btn-danger btn-xs " do %>
-                    <span class="glyphicon glyphicon-pencil"></span>
-                  <% end %>
-                </td>
-
-                <td> <!-- Delete -->
-                  <%= link_to prop, method: :delete, class: "btn-danger btn-xs button", data: { confirm: "Are you sure?"} do %>
-                    <span class="glyphicon glyphicon-trash"></span>
-                  <% end %>
-                </td>
-
-              <% elsif current_user.is_role_by_name?("customer")%>
-                <td> <!-- Add to visiting list -->
-                  <% if @affordable_properties.include?(prop) %>
-                    <%= link_to new_visit_path(property: prop.id), class: "btn-primary btn-xs button" do %>
-                      <span class="glyphicon glyphicon-ok"></span>
+                <% if current_user.is_role_by_name?("owner")%>
+                  <td> <!-- Edit -->
+                    <%= link_to edit_property_path(prop.id), class: "btn-danger btn-xs " do %>
+                      <span class="glyphicon glyphicon-pencil"></span>
                     <% end %>
-                  <% end %>
-                </td>
-              <%end%>
-            </tr>
+                  </td>
+
+                  <td> <!-- Delete -->
+                    <%= link_to prop, method: :delete, class: "btn-danger btn-xs button", data: { confirm: "Are you sure?"} do %>
+                      <span class="glyphicon glyphicon-trash"></span>
+                    <% end %>
+                  </td>
+
+                <% elsif current_user.is_role_by_name?("customer")%>
+                  <td> <!-- Add to visiting list -->
+                    <% if @affordable_properties.include?(prop) %>
+                      <%= link_to new_visit_path(property: prop.id), class: "btn-primary btn-xs button" do %>
+                        <span class="glyphicon glyphicon-ok"></span>
+                      <% end %>
+                    <% end %>
+                  </td>
+                <%end%>
+              </tr>
+            <% else %> <!-- deleted properties -->
+        </tbody>
+      </table>
+      <h2> Deleted properties </h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Photos</th>
+            <th>#</th>
+            <th>Type</th>
+            <th>Address</th>
+            <th>Location</th>
+            <th>Number of Bathrooms</th>
+            <th>Number of Bedrooms</th>
+            <th>Rent Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="text-center">
+                  
+            <% if @photos.nil? || @photos.size == 0 %>
+
+              <td>
+                <div></div> <!-- To fill the space -->
+              </td>
+
+            <% else %>
+
+              <td>
+                <% @photos[prop.id].each do |photo| %>
+                    <%= image_tag photo, class: 'image', alt: 'Property_photo'%>
+                <% end %>
+              </td>
+                  
+            <% end %>
+
+            <td><%= prop.id %></td>
+            <td><%= prop.prop_type %></td>
+            <td><%= prop.address %></td>
+            <td><%= prop.location %></td>
+            <td><%= prop.number_bathrooms %></td>
+            <td><%= prop.number_bedrooms %></td>
+            <td><%= prop.rent_price %></td>
+          </tr>
+        </tbody>
+            <% end %>
           <% end %>
         </tbody>
       </table>
