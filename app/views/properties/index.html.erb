@@ -50,7 +50,9 @@
               <td>
                 <div class="image-container">
                   <% @photos[prop.id].each do |photo| %>
-                    <%= image_tag photo, class: 'image', alt: 'Property_photo'%>
+                    <%= link_to "/assets/#{photo}", class: 'photo-image' do %>
+                      <%= image_tag photo, class: 'image', alt: 'Property_photo'%>
+                    <% end %>
                   <% end %>
                 </div>
               </td>
@@ -123,7 +125,7 @@
 
                   <td>
                     <% @photos[prop.id].each do |photo| %>
-                      <%= image_tag photo, class: 'image', alt: 'Property_photo'%>
+                      <%= image_tag photo, class: 'image photo-image', alt: 'Property_photo'%>
                     <% end %>
                   </td>
 
@@ -148,3 +150,5 @@
 <% if @properties.size != 0 %>
   <%= will_paginate %>
 <% end %>
+
+<%= javascript_include_tag "specific/property_index" %>
