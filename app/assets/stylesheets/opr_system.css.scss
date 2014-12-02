@@ -1,32 +1,11 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-html {
-  overflow-y: scroll;
-}
-
-section {
-  overflow: auto;
-}
-
-textarea {
-  resize: vertical;
-}
-
 .center {
   text-align: center;
 }
 
-.center h1 {
-  margin-bottom: 10px;
-}
 
-h2 {
-  padding-top: 10px;
-}
 
-.btn {
-  margin-top : 20px;
-}
 
 
