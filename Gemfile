@@ -34,6 +34,9 @@ gem 'bootstrap-will_paginate'
 # Use jquery as the JavaScript library
 gem 'jquery-rails', '~> 3.1.2'
 
+#For calendar popup in firefox
+gem "jquery-ui-rails"
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
