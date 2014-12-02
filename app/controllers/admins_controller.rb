@@ -23,27 +23,25 @@ class AdminsController < ApplicationController
     user_name_exist = User.exists? user_name: params[:user][:user_name]
     password_match = params[:user][:password] != params[:user][:password_confirmation]
     user_name_invalid = ((/[^0-9A-Za-z]/) =~ params[:user][:user_name])
-
-    prefix = ['Oh Snap!', 'Holy Moly!', 'Jeepers!', 'Gosh Darnit!'].sample
-
+    flash[:errors] = []
     case 
     when user_name_exist && password_match
-      flash[:alert] = prefix << " That username is already taken and you're passwords don't match"
+      flash[:errors].push "That username is already taken and you're passwords don't match"
       render :new_user_by_admin
     when user_name_exist
-      flash[:alert] = prefix << " That username is already taken."
+      flash[:errors].push "That username is already taken."
       render :new_user_by_admin
     when password_match
-      flash[:alert] = prefix << " You're passwords don't match."
+      flash[:errors].push "You're passwords don't match."
       render :new_user_by_admin
     when user_name_invalid 
-      flash[:alert] = prefix << " Username can only contain letters and numbers." 
+      flash[:errors].push "Username can only contain letters and numbers." 
       render :new_user_by_admin
     when @user.save
-      flash[:notice] = " Account created!"
+      flash[:notice] = "Account created!"
       redirect_to root_path
     else
-      flash[:alert] = prefix << " Ensure the username only contains numbers and letters. The email must be a valid email 
+      flash[:errors].push "nsure the username only contains numbers and letters. The email must be a valid email 
         of the type opr@opr.com. A role must be selected. The user's first name and last name must be specified. A customer's max rent 
         must be completed with a number greated than 0. Passwords must match."
       render :new_user_by_admin
