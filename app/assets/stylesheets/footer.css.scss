@@ -1,16 +1,17 @@
 #github {
-  margin: 0 auto;
   margin: 20px;
-  height: auto;
-  width: 70px;
+  height: 70px;
+  width: auto;
 }
 
 .footer_square {
-  position: absolute;
-  bottom: 0px;
+  position: fixed;
+  bottom: 0;
   width: 100%;
   text-align: center;
   background-color: #4D4D4D;
 }
 
-
+.footer_spacer {
+  height: 120px;
+}
