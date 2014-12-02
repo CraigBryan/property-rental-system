@@ -1,17 +1,17 @@
 		<%= form_for @user, url: admins_create_user_by_admin_path do |f| %>
 
 		<div>
-			<%= f.label :user_name, class: 'white-text'%>*<br>
+			<%= f.label :user_name, class: 'white-text'%><i class="red-text">*</i><br>
 			<%= f.text_field :user_name, class: 'form-control' %><br>
 		</div>
 
 		<div>
-			<%= f.label :email, class: 'white-text'%>*<br>
+			<%= f.label :email, class: 'white-text'%><i class="red-text">*</i><br>
 			<%= f.email_field :email, class: 'form-control'%><br>
 		</div>
 
 		<div>
-			<%= f.label :role, class: 'white-text' %>*<br>
+			<%= f.label :role, class: 'white-text' %><i class="red-text">*</i><br>
 			<% num = 0 %>
 			<%= collection_radio_buttons :role, :roles, Role.all, :id, :name do |b| %>
 			<%= b.label %>
@@ -22,27 +22,27 @@
 		</div>
 
 		<div>
-			<%= f.label :first_name, class: 'white-text input_labels' %>*<br>
+			<%= f.label :first_name, class: 'white-text input_labels' %><i class="red-text">*</i><br>
 			<%= f.text_field :first_name, class: 'form-control'%><br>
 		</div>
 
 		<div>
-			<%= f.label :last_name, class: 'white-text'%>*<br>
+			<%= f.label :last_name, class: 'white-text'%><i class="red-text">*</i><br>
 			<%= f.text_field :last_name, class: 'form-control' %><br>
 		</div>
 
 		<div id="user_max_rent" style="display: none">
-			<%= f.label :max_rent, class: 'white-text'%>*<br>
+			<%= f.label :max_rent, class: 'white-text'%><i class="red-text">*</i><br>
 			<%= f.number_field :max_rent, :min => 0, class: 'form-control' %><br>
 		</div>
 
 		<div>
-			<%= f.label :password, class: 'white-text'%>*<br>
+			<%= f.label :password, class: 'white-text'%><i class="red-text">*</i><br>
 			<%= f.password_field :password, class: 'form-control' %><br>
 		</div>
 
 		<div>
-			<%= f.label :password_confirmation, class: 'white-text'%>*<br>
+			<%= f.label :password_confirmation, class: 'white-text'%><i class="red-text">*</i><br>
 			<%= f.password_field :password_confirmation, class: 'form-control' %><br>
 		</div>
 
