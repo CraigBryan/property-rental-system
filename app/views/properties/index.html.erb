@@ -68,9 +68,13 @@
 
             <td>
               <div class="image-container">
-                <% @photos[prop.id].each do |photo| %>
-                  <%= link_to "/assets/#{photo}", class: 'photo-image' do %>
-                    <%= image_tag photo, class: 'image', alt: 'Property_photo'%>
+                <% if @photos[prop.id].nil? %>
+                  <div></div>
+                <% else %>
+                  <% @photos[prop.id].each do |photo| %>
+                    <%= link_to "/assets/#{photo}", class: 'photo-image' do %>
+                      <%= image_tag photo, class: 'image', alt: 'Property_photo'%>
+                    <% end %>
                   <% end %>
                 <% end %>
               </div>
@@ -167,9 +171,13 @@
 
             <td>
               <div class="image-container">
-                <% @photos[prop.id].each do |photo| %>
-                  <%= link_to "/assets/#{photo}", class: 'photo-image' do %>
-                    <%= image_tag photo, class: 'image', alt: 'Property_photo'%>
+                <% if @photos[prop.id].nil? %>
+                    <div></div>
+                <% else %>
+                  <% @photos[prop.id].each do |photo| %>
+                    <%= link_to "/assets/#{photo}", class: 'photo-image' do %>
+                      <%= image_tag photo, class: 'image', alt: 'Property_photo'%>
+                    <% end %>
                   <% end %>
                 <% end %>
               </div>

@@ -45,3 +45,29 @@ ou.save
 au.add_role(a)
 cu.add_role(c)
 ou.add_role(o)
+
+def get_prop_type
+  ["house", "apartment"].sample
+end
+
+def gen_address
+  address = (1 + rand(9999)).to_s + " "
+  address += ["Craig ", "Ryan ", "Kat ", "Bryan ", "O'Connor ", "Drobnjakovic "].sample
+  address += ["St.", "Rd.", "Way", "Blvd.", "Court"].sample
+end
+
+def gen_location
+  Location.all.sample.name
+end
+
+30.times.each do 
+  p = Property.new({:prop_type => get_prop_type, 
+                    :address => gen_address,
+                    :location => gen_location,
+                    :number_bathrooms => 1 + rand(10),
+                    :number_bedrooms => 1 + rand(10),
+                    :number_other_rooms => 1 + rand(10),
+                    :rent_price => 100 + rand(2000),
+                    :user => ou })
+  p.save
+end
