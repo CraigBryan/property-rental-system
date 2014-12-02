@@ -1,18 +1,20 @@
-<h1 class="text-center">Add to visiting list</h1>
+<h1 id="welcome" class="text-center">Add to visiting list</h1>
+<br>
 
   <%= form_for @visit do |visit_form| %>
 
   <address><%= visit_form.label @property.address %></address>
   <%= visit_form.hidden_field :property, :value => @property.id %>
+
+  <%= visit_form.label :date, class: 'white-text'%>
+  <%= visit_form.date_field :date, class: 'form-control', id: 'datepicker' %>
   <br>
 
-  <%= visit_form.label :date %>
-  <%= visit_form.date_field :date, class: 'form-control' %>
-  <br>
-
-  <%= visit_form.label :time %>
-  <%= visit_form.time_field :time, class: 'form-control' %>
+  <%= visit_form.label :time, class: 'white-text'%>
+  <%= visit_form.time_field :time, class: 'form-control', id: 'time' %>
   <br>
 
   <%= visit_form.submit "Add to Visiting List", class: 'btn btn-primary' %>
 <% end %>
+
+<%= javascript_include_tag "specific/visit_new" %>
