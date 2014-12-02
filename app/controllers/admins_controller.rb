@@ -28,13 +28,13 @@ class AdminsController < ApplicationController
     flash[:errors] = []
     case 
     when user_name_exist && password_match
-      flash[:errors].push "That username is already taken and you're passwords don't match"
+      flash[:errors].push "That username is already taken and your passwords don't match"
       render :new_user_by_admin
     when user_name_exist
       flash[:errors].push "That username is already taken."
       render :new_user_by_admin
     when password_match
-      flash[:errors].push "You're passwords don't match."
+      flash[:errors].push "Your passwords don't match."
       render :new_user_by_admin
     when user_name_invalid 
       flash[:errors].push "Username can only contain letters and numbers." 
