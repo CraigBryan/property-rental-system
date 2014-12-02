@@ -21,9 +21,9 @@ class PropertiesController < ApplicationController
         end
       end
 
-      redirect_to action: 'index' #TODO do something more logical instead
+      redirect_to action: 'index'
     else
-      puts @property.errors.full_messages
+      flash[:errors] = @property.errors.full_messages
       render 'new'
     end
   end

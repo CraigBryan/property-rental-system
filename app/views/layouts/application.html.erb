@@ -15,6 +15,13 @@
     <% if alert %>
       <p class="alert alert-danger"><%= alert %></p>
     <% end %>
+    <% if !errors.nil? && errors.size != 0 %>
+      <p class="alert alert-danger">
+        <% errors.each do |msg| %>
+          <%= prefix %><%= msg %>.</br>
+        <% end %>
+      </p>
+    <% end %>
 
       <div class="jumbotron">
         <div class="container-fluid">
