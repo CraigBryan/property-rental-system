@@ -33,11 +33,10 @@
        </div>
       </div>
 
-    <div class="center">
       <% if user_signed_in? %>
-        <h5 id="logged_as">Hi, <strong><%= current_user.first_name.humanize %></strong></h5>
+        <h5 id="logged_as" class="text-center">Hi, <strong><%= current_user.first_name.humanize %></strong></h5>
       <% end %>
-    </div>
+
     <%= render 'layouts/footer' %>
   </body>
 </html>

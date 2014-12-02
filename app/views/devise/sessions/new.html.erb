@@ -1,6 +1,6 @@
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="field">
-        <%= f.label :user_name %> <br />
+        <%= f.label :user_name, class: 'white-text'%> <br />
         <%= f.text_field :login, autofocus: true, class: 'form-control' %>
       </div>
 
