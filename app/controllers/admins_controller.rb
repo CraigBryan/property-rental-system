@@ -14,9 +14,11 @@ class AdminsController < ApplicationController
 
   def create_user_by_admin
   	@user = User.new(user)
-    @user.add_role_by_name(Role.find(params[:role][:roles]).name)
-    
-    @user.valid?
+
+    unless params[:role].nil? || params[:role][:roles] == ""
+      @user.add_role_by_name(Role.find(params[:role][:roles]).name)
+    end
+   
     #puts @user.valid?
     #puts @user.errors.full_messages
 
@@ -41,9 +43,12 @@ class AdminsController < ApplicationController
       flash[:notice] = "Account created!"
       redirect_to root_path
     else
-      flash[:errors].push "nsure the username only contains numbers and letters. The email must be a valid email 
-        of the type opr@opr.com. A role must be selected. The user's first name and last name must be specified. A customer's max rent 
-        must be completed with a number greated than 0. Passwords must match."
+      flash[:errors].push "Ensure the username only contains numbers and letters"
+      flash[:errors].push "The email must be a valid email of the type opr@opr.com"
+      flash[:errors].push "A role must be selected"
+      flash[:errors].push "The user's first name and last name must be specified"
+      flash[:errors].push "A customer's max rent must be completed with a number greated than 0"
+      flash[:errors].push "Passwords must match"
       render :new_user_by_admin
     end
 
