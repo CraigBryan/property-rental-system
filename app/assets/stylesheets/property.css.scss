@@ -9,8 +9,17 @@
 	margin: 0 70px 0;
 }
 
+.image-container {
+  display:block;
+  vertical-align: none;
+  width: 350px;
+  overflow: auto;
+  margin: 0;
+  padding: 0;
+}
+
 .image {
-	height: auto; 
+	height: 70px; 
 	width: 70px;	
 	z-index: 2;
 	-webkit-transition: all 0.10s ease-in-out;
@@ -26,23 +35,30 @@
     -ms-transform: scale( 1 );
     transform: scale( 1 );
 
-    vertical-align: middle;
+    vertical-align: none;
 
-	&:hover {
+	/*&:hover {
 		-webkit-transform: scale( 1 );
-	    -moz-transform: scale( 1 );
-	    -o-transform: scale( 1 );
-	    -ms-transform: scale( 1 );
-	    transform: scale( 1 );
+	  -moz-transform: scale( 1 );
+	  -o-transform: scale( 1 );
+	  -ms-transform: scale( 1 );
+	  transform: scale( 1 );
 	    
 		height: auto;
-		width: 200px;
-		position:absolute;	
+		width: 350px;
+    float: left;
+		position:absolute;
+    z-index: 3;	
 		
-	    vertical-align: middle;
-	}	
+	  vertical-align: middle;
+	}	*/
+
 }
 
 .label-checkbox {
 	margin-left: 10px;
+}
+
+.black-link {
+  color: #333;
 }

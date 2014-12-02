@@ -4,6 +4,7 @@
 Rails.application.config.assets.version = '1.0'
 
 Rails.application.config.assets.precompile += %w( specific/property_edit.js )
+Rails.application.config.assets.precompile += %w( specific/property_index.js )
 Rails.application.config.assets.precompile += %w( specific/admins.js )
 
 # Precompile additional assets.

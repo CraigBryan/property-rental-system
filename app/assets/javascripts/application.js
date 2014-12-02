@@ -14,3 +14,4 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_directory .
+//= require jquery.magnific-popup.js

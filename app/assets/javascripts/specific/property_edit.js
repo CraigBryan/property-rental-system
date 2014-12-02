@@ -29,7 +29,7 @@ ready = function() {
     selector = "#upload_photo_" + i;
 
     $(selector).change(handler);
-  }
+  };
 };
 
 $(document).ready(ready);

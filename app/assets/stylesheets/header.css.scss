@@ -14,14 +14,14 @@
 a.header_link{
 	height: 65px;
 	line-height:65px;
-	width: 70px;
+      margin-left: 15px;
 	display: inline-block;
 	text-align: center;
 }
 
 .header_link {
 	color: white;
-	font: 16px arial;	
+	font: 16px arial;
 	&:hover {
 		text-decoration: none;
 		color: white;

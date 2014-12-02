@@ -2,7 +2,7 @@ require 'fileutils'
 
 class PropertiesController < ApplicationController
   include FilterHelper
-  before_action :ensure_authorized, :only => [:new, :create, :destroy]
+  before_action :ensure_authorized, :only => [:new, :create, :edit, :update, :destroy]
 
   def new
     @property = Property.new
@@ -21,9 +21,9 @@ class PropertiesController < ApplicationController
         end
       end
 
-      redirect_to action: 'index' #TODO do something more logical instead
+      redirect_to action: 'index'
     else
-      puts @property.errors.full_messages
+      flash[:errors] = @property.errors.full_messages
       render 'new'
     end
   end
@@ -76,20 +76,19 @@ class PropertiesController < ApplicationController
       success = customer_index
     end
 
-    @properties = Property.all
-
+    @properties = sort_properties
     @properties = @properties.paginate(page: params[:page])
     @photos = {}
 
-    @properties.each do |prop|
-      property_photo = []
-      Photo.where("property_id = ?", prop.id).each do |photo|
+    if success
+      @properties.each do |prop|
+        property_photo = []
+        Photo.where("property_id = ?", prop.id).each do |photo|
         property_photo.push(photo.file)
       end
       @photos[prop.id] = property_photo
     end
 
-    if success
       render 'index'
     else
       render 'common/error'
@@ -161,16 +160,20 @@ class PropertiesController < ApplicationController
   end
 
   def owner_index
-    @properties = Property.where(":user_id = ?", current_user.id)
-
+    @properties = Property.where("user_id = ?", current_user.id)
     return true
   end
 
   def customer_index
     @properties = Property.where("deleted != ?", true)
-    
+    @unaffordable_properties = @properties.where("rent_price > ?",
+                                                 current_user.max_rent)
+    @visited_properties = @properties.joins(:visits).where("visits.user_id = ?", current_user.id)
+
+    @search_params = params[:search]
+
     if has_filters?
-      @properties = filter_properties(@properties, params[:search])
+      @properties = filter_properties(@properties, @search_params)
       return true
     else
       flash[:alert] = "Error, no search terms entered"
@@ -179,24 +182,22 @@ class PropertiesController < ApplicationController
   end
 
   def has_filters?
-    search_params = params[:search]
-
     result = false
 
-    return result if search_params.nil?
+    return result if @search_params.nil?
 
-    search_params['locations'].each do |loc|
+    @search_params['locations'].each do |loc|
       result = true unless loc == ""
     end
 
-    search_params['types'].each do |loc|
+    @search_params['types'].each do |loc|
       result = true unless loc == ""
     end
 
-    result = true unless search_params["number_bedrooms"] == ""
-    result = true unless search_params["number_bathrooms"] == ""
-    result = true unless search_params["min_rent"] == ""
-    result = true unless search_params["max_rent"] == ""
+    result = true unless @search_params["number_bedrooms"] == ""
+    result = true unless @search_params["number_bathrooms"] == ""
+    result = true unless @search_params["min_rent"] == ""
+    result = true unless @search_params["max_rent"] == ""
 
     result
   end
@@ -211,5 +212,9 @@ class PropertiesController < ApplicationController
       :changed => params["photo_#{index}_changed"] == "true",
       :new_file => params["photos#{index}"]
     }
+  end
+
+  def sort_properties 
+    return @properties.order(:deleted, params[:sort_by])
   end
 end

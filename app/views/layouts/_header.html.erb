@@ -6,25 +6,28 @@
   <div class="collapse navbar-collapse pull-right">
     <% if admin? %>
       <%= link_to "All Users", all_users_path, class: 'header_link'%>
+      <%= link_to "Create New User ", admins_new_user_by_admin_path, class: 'header_link'%>
     <% end %>
     <!--<% if admin? %>
       <%= link_to "Create New User ", new_user_registration_path, class: 'header_link'%><br />
     <% end %>-->
 
       <% if user_signed_in? %>
-      <%= link_to 'Profile', edit_user_registration_path, class: 'header_link'%> 
-        <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'header_link'%>
-      <% if customer? %> 
-        <%= link_to "Visits", visits_path, class: 'header_link' %>
-        <%= link_to "Properties", search_properties_path, class: 'header_link' %>
-      <%elsif owner?%>
-        <%= link_to "Properties", properties_path, class: 'header_link'%>
-        <%= link_to "Properties", new_property_path, class: 'header_link' %>
-      <%end%>
-      <% else %>
-        <%= link_to "Login", new_user_session_path, class: 'header_link' %>
+        <%= link_to 'Edit Profile', edit_user_registration_path, class: 'header_link'%>
+        <% if customer? %>
+          <%= link_to "Visits", visits_path, class: 'header_link' %>
+          <%= link_to "Properties", search_properties_path, class: 'header_link' %>
+        <%elsif owner?%>
+          <%= link_to "Properties", properties_path, class: 'header_link'%>
+          <%= link_to "Add Property", new_property_path, class: 'header_link' %>
+        <%end%>
+          <%= link_to "Help", help_path, class: 'header_link'%>
+          <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'header_link'%>
+        <% else %>
+          <%= link_to "Help", help_path, class: 'header_link'%>
+          <%= link_to "Login", new_user_session_path, class: 'header_link' %>
       <% end %>
-      <%= link_to "Help", help_path, class: 'header_link'%>
+
     </div>
   </div>
 </div>
