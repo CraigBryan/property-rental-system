@@ -1,6 +1,12 @@
 module ApplicationHelper
+  def errors_exist?
+    return !flash[:errors].nil? && flash[:errors].size != 0
+  end
+
   def errors
-    return flash[:errors]
+    errors_list = flash[:errors]
+    flash[:errors] = nil
+    return errors_list
   end
 
   def prefix
