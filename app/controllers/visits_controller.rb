@@ -16,7 +16,9 @@ class VisitsController < ApplicationController
     if @visit.save
       redirect_to visits_path
     else
-      render "common/error"
+      flash[:errors] = @visit.errors.full_messages
+      @property = Property.find params[:visit][:property]
+      render "new"
     end
   end
 
