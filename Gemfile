@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
-
+#heroku declare ruby version
+gem ruby '2.0.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.6'
 
@@ -27,6 +28,9 @@ gem 'cancan'
 gem 'will_paginate'
 #Tells paginate to use boostrap
 gem 'bootstrap-will_paginate'
+
+#heroku gem to enable all platform features
+gem 'rails_12factor'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
