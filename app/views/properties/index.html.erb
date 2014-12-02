@@ -163,9 +163,13 @@
                 <% else %>
 
                   <td>
-                    <% @photos[prop.id].each do |photo| %>
-                      <%= image_tag photo, class: 'image photo-image', alt: 'Property_photo'%>
-                    <% end %>
+                    <div class="image-container">
+                      <% @photos[prop.id].each do |photo| %>
+                        <%= link_to "/assets/#{photo}", class: 'photo-image' do %>
+                          <%= image_tag photo, class: 'image', alt: 'Property_photo'%>
+                        <% end %>
+                      <% end %>
+                    </div>
                   </td>
 
                 <% end %>
