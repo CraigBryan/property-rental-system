@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get 'visits/view_list'
 
   root 'pages#home'
+  get 'profile' => 'pages#profile'
   get 'help' => 'pages#help'
   get 'contact' => 'pages#contact'
   get 'about' => 'pages#about'
