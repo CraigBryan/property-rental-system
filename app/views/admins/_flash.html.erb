@@ -5,5 +5,8 @@
 
 <% if flash[:successful_signup] %>
 	<%= flash[:successful_signup] %>
-	<span>&times;</span>
+<% end %>
+
+<% if flash[:invalid_username] %>
+	<%= flash[:invalid_username] %>
 <% end %>

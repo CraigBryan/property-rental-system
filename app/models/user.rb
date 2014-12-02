@@ -7,13 +7,14 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :roles
 
   attr_accessor :login
-
+  
+  validates :user_name, presence: true
   validates :email, presence: true
+  #validates_inclusion_of :role, :in => [true, false]
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :password, presence: true
   validates :password_confirmation, presence: true
-
 
   def add_role(role)
   	roles << role 
@@ -50,7 +51,7 @@ class User < ActiveRecord::Base
   def self.find_first_by_auth_conditions(warden_conditions)
   conditions = warden_conditions.dup
   if login = conditions.delete(:login)
-    where(conditions).where(["lower(user_name) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+    where(conditions).where(["lower(user_name) = :value", { :value => login.downcase }]).first
   else
     where(conditions).first
   end

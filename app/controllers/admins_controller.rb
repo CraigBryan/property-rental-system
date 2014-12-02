@@ -1,6 +1,8 @@
 class AdminsController < ApplicationController
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :deny_access_for_non_admins
+
+
   
   def new_user_by_admin
     if params[:user].nil?
@@ -12,31 +14,41 @@ class AdminsController < ApplicationController
 
   def create_user_by_admin
   	@user = User.new(user)
-    @user.add_role_by_name(Role.find(params[:role][:roles]).name)
-    
-    @user.valid?
 
+    unless params[:role].nil? || params[:role][:roles] == ""
+      @user.add_role_by_name(Role.find(params[:role][:roles]).name)
+    end
+   
+    #puts @user.valid?
+    #puts @user.errors.full_messages
 
     user_name_exist = User.exists? user_name: params[:user][:user_name]
     password_match = params[:user][:password] != params[:user][:password_confirmation]
-
-    prefix = ['Oh Snap!', 'Holy Moly!', 'Jeepers!', 'Gosh Darnit!'].sample
-
+    user_name_invalid = ((/[^0-9A-Za-z]/) =~ params[:user][:user_name])
+    flash[:errors] = []
     case 
     when user_name_exist && password_match
-      flash[:unsuccessful_signup] = prefix << " That username is already taken and you're passwords don't match"
+      flash[:errors].push "That username is already taken and you're passwords don't match"
       render :new_user_by_admin
     when user_name_exist
-      flash[:unsuccessful_signup] = prefix << " That username is already taken."
+      flash[:errors].push "That username is already taken."
       render :new_user_by_admin
     when password_match
-      flash[:unsuccessful_signup] = prefix << " You're passwords don't match."
+      flash[:errors].push "You're passwords don't match."
+      render :new_user_by_admin
+    when user_name_invalid 
+      flash[:errors].push "Username can only contain letters and numbers." 
       render :new_user_by_admin
     when @user.save
-      flash[:successful_signup] = prefix << " Account created!"
+      flash[:notice] = "Account created!"
       redirect_to root_path
     else
-      flash[:unsuccessful_signup] = prefix << " Fix up your form"
+      flash[:errors].push "Ensure the username only contains numbers and letters"
+      flash[:errors].push "The email must be a valid email of the type opr@opr.com"
+      flash[:errors].push "A role must be selected"
+      flash[:errors].push "The user's first name and last name must be specified"
+      flash[:errors].push "A customer's max rent must be completed with a number greated than 0"
+      flash[:errors].push "Passwords must match"
       render :new_user_by_admin
     end
 

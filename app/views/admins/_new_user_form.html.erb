@@ -1,56 +1,55 @@
 		<%= form_for @user, url: admins_create_user_by_admin_path do |f| %>
 
-		  	<div>
-				<%= f.label :user_name, class: 'white-text'%>*<br>
-				<%= f.text_field :user_name, class: 'form-control' %><br>
-			</div>
+		<div>
+			<%= f.label :user_name, class: 'white-text'%>*<br>
+			<%= f.text_field :user_name, class: 'form-control' %><br>
+		</div>
 
-		  	<div>
-				<%= f.label :email, class: 'white-text'%>*<br>
-				<%= f.text_field :email, class: 'form-control'%><br>
-			</div>
+		<div>
+			<%= f.label :email, class: 'white-text'%>*<br>
+			<%= f.email_field :email, class: 'form-control'%><br>
+		</div>
 
-			<div>
-				<%= f.label :role, class: 'white-text' %>*<br>
-				<% num = 0 %>
-				<%= collection_radio_buttons :role, :roles, Role.all, :id, :name, :required => true do |b| %>
-					<%= b.label %>
-					<%= b.label { b.radio_button(id: "radio#{num}") }%>
-					<% num += 1 %>
-				<% end %>
+		<div>
+			<%= f.label :role, class: 'white-text' %>*<br>
+			<% num = 0 %>
+			<%= collection_radio_buttons :role, :roles, Role.all, :id, :name do |b| %>
+			<%= b.label %>
+			<%= b.label { b.radio_button(id: "radio#{num}") }%>
+			<% num += 1 %>
+			<% end %>
 
-			</div>
+		</div>
 
-			<div>
-				<%= f.label :first_name, class: 'white-text input_labels' %>*<br>
-				<%= f.text_field :first_name, class: 'form-control'%><br>
-			</div>
+		<div>
+			<%= f.label :first_name, class: 'white-text input_labels' %>*<br>
+			<%= f.text_field :first_name, class: 'form-control'%><br>
+		</div>
 
-			<div>
-				<%= f.label :last_name, class: 'white-text'%>*<br>
-				<%= f.text_field :last_name, class: 'form-control' %><br>
-			</div>
+		<div>
+			<%= f.label :last_name, class: 'white-text'%>*<br>
+			<%= f.text_field :last_name, class: 'form-control' %><br>
+		</div>
 
-			<div id="user_max_rent" style="display: none">
-				<%= f.label :max_rent, class: 'white-text'%>*<br>
-				<%= f.text_field :max_rent, class: 'form-control' %><br>
-			</div>
+		<div id="user_max_rent" style="display: none">
+			<%= f.label :max_rent, class: 'white-text'%>*<br>
+			<%= f.number_field :max_rent, :min => 0, class: 'form-control' %><br>
+		</div>
 
-			<div>
-				<%= f.label :password, class: 'white-text'%>*<br>
-				<%= f.text_field :password, class: 'form-control' %><br>
-			</div>
+		<div>
+			<%= f.label :password, class: 'white-text'%>*<br>
+			<%= f.password_field :password, class: 'form-control' %><br>
+		</div>
 
-			<div>
-				<%= f.label :password_confirmation, class: 'white-text'%>*<br>
-				<%= f.text_field :password_confirmation, class: 'form-control' %><br>
-			</div>
+		<div>
+			<%= f.label :password_confirmation, class: 'white-text'%>*<br>
+			<%= f.password_field :password_confirmation, class: 'form-control' %><br>
+		</div>
 
-			<div>
-				<%= f.submit  "Create User", class: 'btn btn-primary'%>
-			</div>
+		<div>
+			<%= f.submit  "Create User", class: 'btn btn-primary'%>
+		</div>
 
 		<% end %>
 
 		<%= javascript_include_tag "specific/admins" %>
-
