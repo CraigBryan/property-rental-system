@@ -42,31 +42,37 @@ class PropertiesController < ApplicationController
     @property.number_other_rooms = property_params[:number_other_rooms]
     @property.rent_price = property_params[:rent_price]
 
-    #update photo values
-    5.times do |i|
-      photo_params = parse_photo_params(i)
 
-      if photo_params[:deleted]
-        delete_original photo_params[:original_id]
-      end
+    if @property.valid?
+      #update photo values
+      5.times do |i|
+        photo_params = parse_photo_params(i)
 
-      if photo_params[:changed]
-
-        unless photo_params[:original_id].nil? || 
-               photo_params[:original_id] == ""
+        if photo_params[:deleted]
           delete_original photo_params[:original_id]
         end
 
-        p = Photo.new
-        p.property_id = params[:id]
-        p.file = upload_photo photo_params[:new_file], i
-        p.save
+        if photo_params[:changed]
+
+          unless photo_params[:original_id].nil? || 
+                 photo_params[:original_id] == ""
+            delete_original photo_params[:original_id]
+          end
+
+          p = Photo.new
+          p.property_id = params[:id]
+          p.file = upload_photo photo_params[:new_file], i
+          p.save
+        end
       end
+
+      @property.save
+      redirect_to properties_path
+    else
+      @photos = Photo.where("property_id = ?", @property.id)
+      flash[:errors] = @property.errors.full_messages
+      render 'edit'
     end
-
-    @property.save
-
-    redirect_to properties_path
   end
 
   def index
