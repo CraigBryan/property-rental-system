@@ -31,6 +31,9 @@ gem 'bootstrap-will_paginate'
 #heroku gem to enable all platform features
 gem 'rails_12factor'
 
+#switching to unicorn from webrick
+gem 'unicorn'
+
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
 
@@ -67,4 +70,4 @@ gem 'pry', group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-ruby "2.1.4"
+ruby "2.0.0"
