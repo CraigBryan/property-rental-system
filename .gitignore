@@ -16,7 +16,7 @@
 /tmp
 
 # ignore database config 
-/config/database.yml
+# /config/database.yml
 
 # ignore uploaded photo files
 /app/assets/images/uploads/*
